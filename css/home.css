@@ -1,0 +1,515 @@
+:root {
+    --home-dark-bg: #161616;
+    --home-light-text: #FFF7E9;
+    --home-noise-opacity: 0.05; /* Adjust this value to control noise intensity */
+    
+    /* Background image variables */
+    --home-bg-image-width: 75%;
+    --home-bg-image-height: 75%;
+    --home-bg-image-opacity: 0.7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all .2s ease-in;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--home-dark-bg);
+    color: var(--home-light-text);
+    line-height: 1.6;
+    position: relative; /* Added for proper positioning */
+}
+
+/* Noise texture effect */
+.home-noise-texture {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: var(--home-noise-opacity);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Home section specific styles */
+.homeSection {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.home-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1; /* Above noise texture */
+}
+
+/* Header Styles */
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    width: 100%;
+    z-index: 10;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
+.home-logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--home-light-text);
+    text-decoration: none;
+}
+
+.home-logo sup {
+    font-size: 0.6rem;
+    vertical-align: super;
+}
+
+.home-nav {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 100; /* Higher z-index for menu */
+}
+
+.home-nav ul.home-nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.home-nav a {
+    color: var(--home-light-text);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: opacity 0.3s ease;
+}
+
+.home-nav a:hover {
+    opacity: 0.7;
+}
+
+.home-cta-button {
+    background-color: var(--home-light-text);
+    color: var(--home-dark-bg) !important; /* Added !important to ensure text color applies */
+    padding: 0.7rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 700; /* Increased font weight for better visibility */
+    transition: all 0.3s ease;
+}
+
+.home-cta-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Hamburger Menu */
+.home-hamburger-menu {
+    display: none;
+    cursor: pointer;
+    z-index: 110; /* Higher z-index for menu toggler */
+}
+
+.home-hamburger-icon {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+}
+
+.home-hamburger-icon span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: var(--home-light-text);
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+
+.home-hamburger-icon span:nth-child(1) {
+    top: 0px;
+}
+
+.home-hamburger-icon span:nth-child(2) {
+    top: 9px;
+}
+
+.home-hamburger-icon span:nth-child(3) {
+    top: 18px;
+}
+
+.home-hamburger-icon.home-open span:nth-child(1) {
+    top: 9px;
+    transform: rotate(135deg);
+}
+
+.home-hamburger-icon.home-open span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+}
+
+.home-hamburger-icon.home-open span:nth-child(3) {
+    top: 9px;
+    transform: rotate(-135deg);
+}
+
+/* Hero Section */
+.home-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Background Image - FIXED POSITIONING */
+.home-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: var(--home-bg-image-width);
+    height: var(--home-bg-image-height);
+    background-image: url('/images/home.png');
+    background-size: contain; /* This preserves the image's aspect ratio */
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: var(--home-bg-image-opacity);
+    z-index: 1;
+}
+
+.home-hero-text {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    z-index: 2; /* Ensure text is above the background image */
+}
+
+.home-hero-text h1 {
+    font-size: clamp(2rem, 8vw, 4.53rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0.5rem 0;
+    letter-spacing: -0.03em;
+    width: 100%;
+    opacity: 0;
+    /* Text shadow to help with readability against the background image */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.home-hero-text h1.home-solid {
+    color: var(--home-light-text);
+}
+
+.home-hero-text h1.home-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--home-light-text);
+    /* Override text shadow for the outline version */
+    text-shadow: none;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animations to each heading */
+.home-hero-text h1:nth-child(1) {
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.7s;
+}
+
+.home-hero-text h1:nth-child(2) {
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.9s;
+}
+
+.home-hero-text h1:nth-child(3) {
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 1.1s;
+}
+
+/* Animate the background image */
+.home-background-image {
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: var(--home-bg-image-opacity);
+    }
+}
+
+/* Section styling for all sections */
+section {
+    position: relative;
+    z-index: 1;
+}
+
+/* -------------------------- */
+/* TEXT SLIDE UP ANIMATION */
+/* -------------------------- */
+
+/* Common styles for all animated links */
+.text-slide-link {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    text-decoration: none;
+    padding: 2px 0;
+    cursor: pointer;
+}
+
+.text-slide-link .text-content {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.text-slide-link .text-visible {
+    display: block;
+    transform: translateY(0);
+    transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.text-slide-link .text-hidden {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: block;
+    transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.text-slide-link:hover .text-visible {
+    transform: translateY(-100%);
+}
+
+.text-slide-link:hover .text-hidden {
+    transform: translateY(-100%);
+}
+
+/* Override default link hover styles when using text-slide-link */
+.home-nav a.text-slide-link:hover {
+    opacity: 1;
+}
+
+/* Special styling for CTA button with text slide */
+.home-cta-button.text-slide-link {
+    padding: 0.7rem 1.5rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+.home-cta-button.text-slide-link .text-content {
+    color: var(--home-dark-bg);
+}
+
+.home-cta-button.text-slide-link:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Responsive styles */
+/* Large mobile screens and tablets (up to 1024px) */
+@media (max-width: 1024px) {
+    :root {
+        --home-bg-image-width: 63%;
+        --home-bg-image-height: 63%;
+    }
+
+    .home-nav ul.home-nav-menu {
+        gap: 1.5rem;
+    }
+    
+    .home-hamburger-menu {
+        display: block;
+    }
+    
+    .home-nav ul.home-nav-menu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background-color: var(--home-dark-bg);
+        padding: 6rem 2rem 2rem;
+        gap: 2rem;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        z-index: 50;
+    }
+    
+    .home-nav ul.home-nav-menu.home-active {
+        right: 0;
+    }
+    
+    /* Adjust text slide animation for mobile */
+    .home-nav-menu a.text-slide-link {
+        width: auto;
+        display: inline-block;
+    }
+}
+
+/* Medium mobile screens (up to 778px) */
+@media (max-width: 778px) {
+    :root {
+        --home-bg-image-width: 60%;
+        --home-bg-image-height: 60%;
+    }
+
+    .home-hamburger-menu {
+        display: block;
+    }
+    
+    .home-nav ul.home-nav-menu {
+        width: 220px;
+    }
+    
+    .home-hero-text h1 {
+        font-size: clamp(3rem, 6vw, 3rem);
+    }
+    
+    .home-hero-text h1.home-outline {
+        -webkit-text-stroke: 1px var(--home-light-text);
+    }
+}
+
+/* Small mobile screens (up to 435px) */
+@media (max-width: 435px) {
+    :root {
+        --home-bg-image-width: 68%;
+        --home-bg-image-height: 68%;
+    }
+
+    .home-container {
+        padding: 0 1rem;
+    }
+    
+    .home-header {
+        padding: 1.5rem 0;
+    }
+    
+    .home-logo a {
+        font-size: 1.2rem;
+    }
+    
+    .home-nav ul.home-nav-menu {
+        width: 100%;
+        right: -100%;
+        padding: 5rem 1.5rem 1.5rem;
+    }
+    
+    .home-hero-text h1 {
+        font-size: clamp(3rem, 5vw, 2.5rem);
+    }
+}
+
+/* Small mobile screens (up to 385px) */
+@media (max-width: 385px) {
+    :root {
+        --home-bg-image-width: 64%;
+        --home-bg-image-height: 64%;
+    }
+
+    .home-container {
+        padding: 0 1rem;
+    }
+    
+    .home-header {
+        padding: 1.5rem 0;
+    }
+    
+    .home-logo a {
+        font-size: 1.2rem;
+    }
+    
+    .home-nav ul.home-nav-menu {
+        width: 100%;
+        right: -100%;
+        padding: 5rem 1.5rem 1.5rem;
+    }
+    
+    .home-hero-text h1 {
+        font-size: clamp(2.5rem, 5vw, 2.5rem);
+    }
+}
+
+/* Small mobile screens (up to 325px) */
+@media (max-width: 325px) {
+    :root {
+        --home-bg-image-width: 76%;
+        --home-bg-image-height: 76%;
+    }
+
+    .home-container {
+        padding: 0 1rem;
+    }
+    
+    .home-header {
+        padding: 1.5rem 0;
+    }
+    
+    .home-logo a {
+        font-size: 1.2rem;
+    }
+    
+    .home-nav ul.home-nav-menu {
+        width: 100%;
+        right: -100%;
+        padding: 5rem 1.5rem 1.5rem;
+    }
+    
+    .home-hero-text h1 {
+        font-size: clamp(2.5rem, 5vw, 2.5rem);
+    }
+}

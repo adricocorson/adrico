@@ -1,0 +1,64 @@
+<div class="about-container" id="about">
+    <div class="about-header scroll-fade-in">
+        <h1>ABOUT ME</h1>
+    </div>
+
+    <div class="about-content">
+        <div class="about-photo scroll-fade-in" data-scroll-delay="200">
+            <img src="images/adrico1.jpg" alt="Adrico Corson Mulia" id="profile-image" />
+        </div>
+        <div class="about-text">
+            <div class="about-text-container">
+                <h2 class="scroll-slide-up" data-scroll-delay="400">A brief intro, who am I?</h2>
+                <p class="scroll-slide-up" data-scroll-delay="600">Hi, I'm <strong>Adrico Corson Mulia</strong>, a passionate and driven Information Technology student currently pursuing a <strong>Bachelor of Science (Honours) in Information Technology</strong> with a focus on <strong>Business Information Systems</strong> at <strong>Asia Pacific University</strong>. I have a strong foundation in programming, front-end development, and UI/UX design, with hands-on experience building full-stack applications and optimizing user experiences.</p>
+                <p class="scroll-slide-up" data-scroll-delay="700">I'm also a <strong>self-learner</strong> who's always eager to explore new technologies, take on challenges, and continually improve my skills beyond the classroom. Currently, I'm seeking opportunities where I can contribute to innovative IT projects, grow further as a developer, and gain meaningful industry experience.</p>
+                
+                <!-- Resume Download and Preview Section - Inside text container -->
+                <div class="adrico-resume-section scroll-slide-up" data-scroll-delay="800">
+                    <h3 class="resume-heading">Download my résumé to see my journey!</h3>
+                    <div class="resume-wrapper">
+                        <a href="/file/AdricoCorson_Resume.pdf" download class="resume-download-btn">
+                            Résumé <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for Resume Preview -->
+    <div id="resume-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="resume-preview">
+                <iframe id="resume-iframe" src="/file/AdricoCorson_Resume.pdf" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Javascript for Modal functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('resume-modal');
+        const previewBtn = document.getElementById('preview-resume');
+        const closeBtn = document.querySelector('.close-modal');
+        
+        previewBtn.addEventListener('click', function() {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeBtn.addEventListener('click', function() {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        });
+        
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+</script>

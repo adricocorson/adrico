@@ -1,0 +1,243 @@
+/* Footer styles */
+
+
+.footer {
+    background-color: #161616;
+    color: #FFF7E9;
+    padding: 2rem;
+    position: relative;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Manrope', sans-serif;
+    margin-top: 2rem;
+}
+
+/* Add subtle noise texture to the background */
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+/* Container for the three columns */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 3rem;
+}
+
+/* Each footer section (Menu, Socials, Resources) */
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    color: #FFF7E9;
+    opacity: 0.9;
+    border-bottom: 1px solid rgba(255, 247, 233, 0.15);
+    padding-bottom: 10px;
+    font-family: 'Manrope', sans-serif;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: #FFF7E9;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    font-family: 'Manrope', sans-serif;
+}
+
+.footer-section a:hover {
+    opacity: 1;
+}
+
+/* Bottom section with copyright, time and scroll button */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Copyright section */
+.copyright {
+    flex: 1;
+}
+
+.copyright-main {
+    margin: 0;
+    line-height: 1.2;
+    font-size: 30px;
+    font-weight: 500;
+    color: #FFF7E9;
+    opacity: 0.9;
+    font-family: 'Manrope', sans-serif;
+}
+
+.copyright-sub {
+    margin: 0;
+    line-height: 1.2;
+    font-size: 30px;
+    font-weight: 500;
+    color: #FFF7E9;
+    opacity: 0.9;
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Local time section */
+.local-time {
+    flex: 1;
+    text-align: center;
+}
+
+.local-time p:first-child {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    color: #FFF7E9;
+    opacity: 0.8;
+    margin-top: 0;
+    font-family: 'Manrope', sans-serif;
+}
+
+.local-time p:last-child {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    font-size: 15px;
+    color: #FFF7E9;
+    opacity: 0.8;
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Scroll to top button */
+.scroll-top {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 247, 233, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    color: #FFF7E9;
+    text-decoration: none;
+}
+
+.scroll-top:hover {
+    background-color: rgba(255, 247, 233, 0.2);
+}
+
+.scroll-top svg {
+    width: 20px;
+    height: 20px;
+    stroke: #FFF7E9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .copyright, .local-time {
+        text-align: center;
+    }
+    
+    .scroll-top {
+        margin: 0 auto;
+    }
+    
+    .copyright-main,
+    .copyright-sub {
+        font-size: 24px;
+    }
+}
+
+/* Text Slide Up Animation for Navigation and Footer Links */
+
+/* Common styles for all animated links */
+.text-slide-link {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    text-decoration: none;
+    padding: 2px 0;
+    cursor: pointer;
+}
+
+.text-slide-link .text-content {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.text-slide-link .text-visible {
+    display: block;
+    transform: translateY(0);
+    transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.text-slide-link .text-hidden {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: block;
+    transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.text-slide-link:hover .text-visible {
+    transform: translateY(-100%);
+}
+
+.text-slide-link:hover .text-hidden {
+    transform: translateY(-100%);
+}
+
+/* Override default link styles when using text-slide-link */
+.footer-section a.text-slide-link {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.footer-section a.text-slide-link:hover {
+    opacity: 1;
+}
+

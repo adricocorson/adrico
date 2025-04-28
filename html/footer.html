@@ -1,0 +1,126 @@
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section scroll-fade-in" data-scroll-delay="100">
+            <h3 class="scroll-slide-up" data-scroll-delay="150">Menu</h3>
+            <ul>
+                <li class="scroll-slide-up" data-scroll-delay="200"><a href="#home" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">Home</span>
+                        <span class="text-hidden">Home</span>
+                    </span>
+                </a></li>
+                <li class="scroll-slide-up" data-scroll-delay="250"><a href="#about" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">About</span>
+                        <span class="text-hidden">About</span>
+                    </span>
+                </a></li>
+                <li class="scroll-slide-up" data-scroll-delay="300"><a href="#services" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">Services</span>
+                        <span class="text-hidden">Services</span>
+                    </span>
+                </a></li>
+                <li class="scroll-slide-up" data-scroll-delay="350"><a href="#projects" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">Projects</span>
+                        <span class="text-hidden">Projects</span>
+                    </span>
+                </a></li>
+                <li class="scroll-slide-up" data-scroll-delay="400"><a href="#contact" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">Contact</span>
+                        <span class="text-hidden">Contact</span>
+                    </span>
+                </a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section scroll-fade-in" data-scroll-delay="150">
+            <h3 class="scroll-slide-up" data-scroll-delay="200">Socials</h3>
+            <ul>
+                <li class="scroll-slide-up" data-scroll-delay="250"><a href="https://www.linkedin.com/in/adrico/" target="_blank" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">Linkedin</span>
+                        <span class="text-hidden">Linkedin</span>
+                    </span>
+                </a></li>
+                <li class="scroll-slide-up" data-scroll-delay="300"><a href="https://www.instagram.com/adricocorson/" target="_blank" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">Instagram</span>
+                        <span class="text-hidden">Instagram</span>
+                    </span>
+                </a></li>
+                <li class="scroll-slide-up" data-scroll-delay="350"><a href="https://wa.me/601128741876" target="_blank" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">WhatsApp</span>
+                        <span class="text-hidden">WhatsApp</span>
+                    </span>
+                </a></li>
+                <li class="scroll-slide-up" data-scroll-delay="400"><a href="https://github.com/adricocorson" target="_blank" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">Github</span>
+                        <span class="text-hidden">Github</span>
+                    </span>
+                </a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section scroll-fade-in" data-scroll-delay="200">
+            <h3 class="scroll-slide-up" data-scroll-delay="250">Contact Details</h3>
+            <ul>
+                <li class="scroll-slide-up" data-scroll-delay="300"><a href="mailto:adricocorsonz@gmail.com" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">adricocorsonz@gmail.com</span>
+                        <span class="text-hidden">adricocorsonz@gmail.com</span>
+                    </span>
+                </a></li>
+                <li class="scroll-slide-up" data-scroll-delay="350"><a href="tel:+601128741876" class="text-slide-link">
+                    <span class="text-content">
+                        <span class="text-visible">+60 11 2874 1876</span>
+                        <span class="text-hidden">+60 11 2874 1876</span>
+                    </span>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-bottom scroll-fade-in" data-scroll-delay="300" data-scroll-duration="1200">
+        <div class="copyright">
+            <p class="copyright-main scroll-slide-up" data-scroll-delay="400">© 2025 Adrico Corson Mulia</p>
+            <p class="copyright-sub scroll-slide-up" data-scroll-delay="450">All rights reserved.</p>
+        </div>
+        
+        <div class="local-time scroll-fade-in" data-scroll-delay="500">
+            <p class="scroll-slide-up" data-scroll-delay="550">LOCAL TIME (KL/MY)</p>
+            <p id="current-time" class="scroll-slide-up" data-scroll-delay="600">Loading...</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Malaysia Time Script -->
+<script>
+    // Function to update the local time for Malaysia
+    function updateMalaysiaTime() {
+        // Get the current date and time in Malaysia (UTC+8)
+        const options = {
+            timeZone: 'Asia/Kuala_Lumpur',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        };
+        
+        const malaysiaTime = new Date().toLocaleTimeString('en-US', options);
+        
+        // Update the time element
+        document.getElementById('current-time').textContent = malaysiaTime;
+    }
+
+    // Update time immediately
+    updateMalaysiaTime();
+
+    // Update time every second
+    setInterval(updateMalaysiaTime, 1000);
+</script>

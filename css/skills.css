@@ -1,0 +1,260 @@
+/* Skills section styles */
+.servicesSection {
+    position: relative;
+    width: 100%;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem 2rem; /* Reduced top padding from 2rem to 0 */
+    position: relative;
+    z-index: 2;
+}
+
+/* Section styles */
+.section {
+    padding: 2rem 1rem 4rem 0; /* Reduced top padding from 4rem to 2rem */
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.section-content {
+    flex: 1;
+    min-width: 300px;
+    padding-right: 2rem;
+    padding-left: 0;
+    text-align: left;
+    margin-left: 0;
+}
+
+.section-list {
+    flex: 1;
+    min-width: 300px;
+    margin-left: auto;
+    text-align: left;
+    padding-left: 5rem;
+    padding-right: 2rem;
+}
+
+.section-heading {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem; /* Reduced from 3rem to 2rem */
+    position: relative;
+    overflow: hidden; /* To contain the large heading */
+}
+
+.section-heading h1 {
+    font-size: 90px;
+    font-weight: 600;
+    color: #FFF7E9; /* Muted color for SERVICES heading - adjusted for dark mode */
+    position: relative;
+    display: inline-block;
+    padding: 0 20px;
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    font-family: 'Manrope', sans-serif;
+}
+
+.section-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #FFF7E9;
+    font-family: 'Manrope', sans-serif;
+}
+
+.section-content p {
+    font-size: 1rem;
+    max-width: 500px;
+    margin-bottom: 2rem;
+    color: #FFF7E9;
+    font-family: 'Manrope', sans-serif;
+}
+
+.section-list ul {
+    list-style: none;
+}
+
+.section-list li {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #a7a79d; /* Muted color for list items - adjusted for dark mode */
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Services specific styles */
+.services {
+    margin-top: 0; /* Reduced from 3rem to 0 */
+    position: relative;
+}
+
+.services h1 {
+    opacity: 0.8;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: #a7a79d;
+    border-radius: 50%;
+    margin: 0.5rem auto;
+}
+
+/* Responsive styles */
+/* Small mobile devices (S) - 320px to 374px */
+@media (max-width: 374px) {
+    .container {
+        padding: 0 20px 30px 20px; /* Changed from 30px 20px */
+    }
+    
+    .section-heading {
+        margin-bottom: 25px; /* Reduced from 35px */
+    }
+    
+    .section-heading h1 {
+        font-size: 48px;  /* Increased from 36px */
+        padding: 0 10px;
+        letter-spacing: -1px;
+    }
+    
+    .section {
+        padding: 1.5rem 0 2.5rem 0;  /* Reduced top padding */
+        flex-direction: column;
+        gap: 25px;  /* Increased from 20px */
+    }
+    
+    .section-content {
+        flex: 0 0 100%;
+        padding-right: 0;
+        margin-bottom: 20px;  /* Increased from 15px */
+    }
+    
+    .section-list {
+        flex: 0 0 100%;
+        padding-left: 20px;  /* Increased from 15px */
+        padding-right: 0;
+        margin-left: 0;
+        text-align: left;
+    }
+    
+    .section-content h2 {
+        font-size: 26px;  /* Increased from 22px */
+        margin-bottom: 15px;  /* Increased from 12px */
+    }
+    
+    .section-content p {
+        font-size: 16px;  /* Increased from 14px */
+        margin-bottom: 18px;  /* Increased from 14px */
+    }
+    
+    .section-list li {
+        font-size: 22px;  /* Increased from 18px */
+        margin-bottom: 12px;  /* Increased from 8px */
+    }
+}
+
+/* Medium mobile devices (M) - 375px to 424px */
+@media (min-width: 375px) and (max-width: 424px) {
+    .container {
+        padding: 0 25px 35px 25px;  /* Changed from 35px 25px */
+    }
+    
+    .section-heading {
+        margin-bottom: 30px;  /* Reduced from 40px */
+    }
+    
+    .section-heading h1 {
+        font-size: 56px;  /* Increased from 48px */
+        padding: 0 15px;
+    }
+    
+    .section {
+        padding: 1.5rem 0 3rem 0;  /* Reduced top padding */
+        flex-direction: column;
+        gap: 30px;  /* Increased from 25px */
+    }
+    
+    .section-content {
+        flex: 0 0 100%;
+        padding-right: 0;
+        margin-bottom: 20px;  /* Increased from 15px */
+    }
+    
+    .section-list {
+        flex: 0 0 100%;
+        padding-left: 20px;  /* Increased from 15px */
+        padding-right: 0;
+        margin-left: 0;
+        text-align: left;
+    }
+    
+    .section-content h2 {
+        font-size: 28px;  /* Increased from 24px */
+        margin-bottom: 16px;  /* Increased from 14px */
+    }
+    
+    .section-content p {
+        font-size: 17px;  /* Increased from 15px */
+        margin-bottom: 20px;  /* Increased from 16px */
+    }
+    
+    .section-list li {
+        font-size: 24px;  /* Increased from 20px */
+        margin-bottom: 14px;  /* Increased from 10px */
+    }
+}
+
+/* Large mobile devices (L) - 425px to 700px */
+@media (min-width: 425px) and (max-width: 700px) {
+    .container {
+        padding: 0 25px 40px 25px;  /* Changed from 40px 25px */
+    }
+    
+    .section-heading {
+        margin-bottom: 35px;  /* Reduced from 45px */
+    }
+    
+    .section-heading h1 {
+        font-size: 70px;  /* Increased from 60px */
+    }
+    
+    .section {
+        padding: 2rem 0 3.5rem 0;  /* Reduced top padding */
+        flex-direction: column;
+        gap: 35px;  /* Increased from 30px */
+    }
+    
+    .section-content {
+        flex: 0 0 100%;
+        padding-right: 0;
+        margin-bottom: 25px;  /* Increased from 20px */
+    }
+    
+    .section-list {
+        flex: 0 0 100%;
+        padding-left: 20px;  /* Increased from 15px */
+        padding-right: 0;
+        margin-left: 0;
+        text-align: left;
+    }
+    
+    .section-content h2 {
+        font-size: 32px;  /* Increased from 28px */
+        margin-bottom: 18px;
+    }
+    
+    .section-content p {
+        font-size: 18px;  /* Increased from 16px */
+        margin-bottom: 22px;
+    }
+    
+    .section-list li {
+        font-size: 26px;  /* Increased from 22px */
+        margin-bottom: 16px;  /* Increased from 12px */
+    }
+}

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/dark-scrollbar.css">
     <link rel="stylesheet" href="css/cursor.css">
+    <!-- IMPORTANT: Make sure there's no reference to hamburger-menu.js anywhere in this file -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* Basic styles */
@@ -85,7 +86,7 @@
                     <a href="#">rixco<sup>®</sup></a>
                 </div>
                 <nav class="home-nav">
-                    <div class="home-hamburger-menu" id="hamburger-menu">
+                    <div class="home-hamburger-menu" id="hamburger-menu" onclick="toggleMenu(event)">
                         <div class="home-hamburger-icon">
                             <span></span>
                             <span></span>
@@ -165,48 +166,40 @@
     <script src="js/smooth-scroll.js"></script>
     <script src="js/cursor.js"></script>
     
-    <!-- Hamburger Menu Script (standalone, no external file) -->
+    <!-- New Hamburger Menu Script (using direct toggleMenu function) -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM loaded, checking for hamburger elements...');
-        
-        // Get hamburger elements by ID to be more reliable
-        const hamburgerMenu = document.querySelector('.home-hamburger-menu');
-        const hamburgerIcon = document.querySelector('.home-hamburger-icon');
-        const navMenu = document.querySelector('.home-nav-menu');
-        
-        console.log('Found hamburger menu:', hamburgerMenu !== null);
-        console.log('Found hamburger icon:', hamburgerIcon !== null);
-        console.log('Found nav menu:', navMenu !== null);
-        
-        // Direct click handler on the hamburger element itself
-        if (hamburgerMenu) {
-            hamburgerMenu.addEventListener('click', function(e) {
-                console.log('Hamburger clicked!');
-                e.preventDefault();
-                e.stopPropagation();
-                
-                if (hamburgerIcon && navMenu) {
-                    hamburgerIcon.classList.toggle('home-open');
-                    navMenu.classList.toggle('home-active');
-                    document.body.classList.toggle('no-scroll');
-                }
-                return false;
-            });
-            
-            // Add direct inline handler as backup
-            hamburgerMenu.onclick = function(e) {
-                console.log('Hamburger clicked via onclick!');
-                e.stopPropagation();
-                
-                if (hamburgerIcon && navMenu) {
-                    hamburgerIcon.classList.toggle('home-open');
-                    navMenu.classList.toggle('home-active');
-                    document.body.classList.toggle('no-scroll');
-                }
-                return false;
-            };
+    // Global hamburger variables
+    var hamburgerIcon = null;
+    var navMenu = null;
+    
+    // Toggle function called directly from HTML
+    function toggleMenu(e) {
+        console.log('Hamburger clicked via inline onclick!');
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
         }
+        
+        // Get elements if not already retrieved
+        if (!hamburgerIcon) hamburgerIcon = document.querySelector('.home-hamburger-icon');
+        if (!navMenu) navMenu = document.querySelector('.home-nav-menu');
+        
+        // Toggle classes
+        if (hamburgerIcon && navMenu) {
+            hamburgerIcon.classList.toggle('home-open');
+            navMenu.classList.toggle('home-active');
+            document.body.classList.toggle('no-scroll');
+        }
+        
+        return false;
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, initializing hamburger menu...');
+        
+        // Initialize elements
+        hamburgerIcon = document.querySelector('.home-hamburger-icon');
+        navMenu = document.querySelector('.home-nav-menu');
         
         // Close menu when clicking navigation links
         const navLinks = document.querySelectorAll('.home-nav-menu a');
@@ -222,10 +215,10 @@
         
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (navMenu && hamburgerMenu && 
+            if (navMenu && 
                 navMenu.classList.contains('home-active') && 
                 !navMenu.contains(e.target) && 
-                !hamburgerMenu.contains(e.target)) {
+                !document.getElementById('hamburger-menu').contains(e.target)) {
                 if (hamburgerIcon) {
                     hamburgerIcon.classList.remove('home-open');
                 }

@@ -105,6 +105,7 @@
     position: relative;
     overflow: hidden;
     transition: transform 0.5s ease;
+    display: block !important; /* Ensure visibility on all devices */
 }
 
 .project-image::after {
@@ -164,7 +165,7 @@
 }
 
 .project-tags {
-    display: flex;
+    display: flex !important; /* Force display on all devices */
     flex-wrap: wrap;
     gap: 0.4rem;
     margin-bottom: 0.6rem;
@@ -180,6 +181,7 @@
     letter-spacing: 0.5px;
     transition: background-color 0.3s ease, color 0.3s ease;
     font-family: 'Manrope', sans-serif;
+    display: inline-block !important; /* Force display on all devices */
 }
 
 .project-card:hover .project-tag {
@@ -188,10 +190,11 @@
 
 .project-footer {
     margin-top: auto;
+    display: block !important; /* Force display on all devices */
 }
 
 .project-link {
-    display: flex;
+    display: flex !important; /* Force display on all devices */
     align-items: center;
     color: #FFF7E9;
     text-decoration: none;
@@ -255,7 +258,7 @@
 /* Small mobile devices (S) - 320px to 374px */
 @media (max-width: 374px) {
     .projects-container {
-        padding: 30px 20px;
+        padding: 30px 15px;
     }
     
     .projects-heading {
@@ -297,17 +300,26 @@
     
     .project-image {
         height: 160px;
+        display: block !important; /* Force display on mobile */
     }
     
     .project-title {
         font-size: 1.3rem;
+    }
+    
+    /* Force display elements that might be hidden on mobile */
+    .project-tags,
+    .project-tag,
+    .project-footer,
+    .project-link {
+        display: flex !important;
     }
 }
 
 /* Medium mobile devices (M) - 375px to 424px */
 @media (min-width: 375px) and (max-width: 424px) {
     .projects-container {
-        padding: 25px 20px;
+        padding: 25px 15px;
     }
     
     .projects-heading {
@@ -350,13 +362,22 @@
     
     .project-image {
         height: 200px;
+        display: block !important; /* Force display on mobile */
+    }
+    
+    /* Force display elements that might be hidden on mobile */
+    .project-tags,
+    .project-tag,
+    .project-footer,
+    .project-link {
+        display: flex !important;
     }
 }
 
 /* Large mobile devices (L) - 425px to 700px */
 @media (min-width: 425px) and (max-width: 700px) {
     .projects-container {
-        padding: 30px 20px;
+        padding: 30px 15px;
     }
     
     .projects-heading {
@@ -402,6 +423,15 @@
     
     .project-image {
         height: 220px;
+        display: block !important; /* Force display on mobile */
+    }
+    
+    /* Force display elements that might be hidden on mobile */
+    .project-tags,
+    .project-tag,
+    .project-footer,
+    .project-link {
+        display: flex !important;
     }
 }
 

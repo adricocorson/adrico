@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>rixco</title>
-    <link rel="icon" href="/file/A.png"
-        type="image/x-icon" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/file/A.png" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/home.css">
@@ -19,9 +17,36 @@
     <link rel="stylesheet" href="css/cursor.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        /* ... (your existing styles) ... */
-        body { background-color: #161616; color: #FFF7E9; /* ... */ }
-        .pageSection { overflow-x: hidden; position: relative; /* ... */ }
+        /* Basic styles */
+        body { background-color: #161616; color: #FFF7E9; }
+        .pageSection { overflow-x: hidden; position: relative; }
+        
+        /* Enhanced hamburger menu styles for better mobile usability */
+        .home-hamburger-menu {
+            display: none;
+            cursor: pointer;
+            z-index: 999 !important; /* Ensure it's above everything */
+            padding: 20px !important; /* Larger touch target */
+            margin: -20px !important;
+            position: relative;
+        }
+
+        .home-hamburger-icon {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            transform: rotate(0deg);
+            transition: .5s ease-in-out;
+            z-index: 999 !important; /* Ensure it's above everything */
+        }
+        
+        /* Force display on mobile */
+        @media (max-width: 1024px) {
+            .home-hamburger-menu {
+                display: block !important;
+            }
+        }
+        
         /* Fix for non-displaying elements on mobile */
         @media (max-width: 767px) {
             .project-image, .project-tags, .project-footer, .project-link {
@@ -51,12 +76,67 @@
     <!-- Custom Cursor Element -->
     <div class="cursor"></div>
     
-    <!-- Keep this for home section only -->
+    <!-- Home section with complete header and main content -->
     <section id="home" class="homeSection pageSection">
         <div class="home-noise-texture"></div>
         <div class="home-container">
-             <header class="home-header scroll-fade-in" data-scroll-duration="1000">...</header>
-             <main class="home-main">...</main>
+            <header class="home-header scroll-fade-in" data-scroll-duration="1000">
+                <div class="home-logo">
+                    <a href="#">rixco<sup>®</sup></a>
+                </div>
+                <nav class="home-nav">
+                    <div class="home-hamburger-menu" id="hamburger-menu">
+                        <div class="home-hamburger-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <ul class="home-nav-menu">
+                        <li class="scroll-fade-in" data-scroll-delay="100"><a href="#home" class="text-slide-link">
+                            <span class="text-content">
+                                <span class="text-visible">home</span>
+                                <span class="text-hidden">home</span>
+                            </span>
+                        </a></li>
+                        <li class="scroll-fade-in" data-scroll-delay="200"><a href="#about" class="text-slide-link">
+                            <span class="text-content">
+                                <span class="text-visible">about</span>
+                                <span class="text-hidden">about</span>
+                            </span>
+                        </a></li>
+                        <li class="scroll-fade-in" data-scroll-delay="300"><a href="#services" class="text-slide-link">
+                            <span class="text-content">
+                                <span class="text-visible">services</span>
+                                <span class="text-hidden">services</span>
+                            </span>
+                        </a></li>
+                        <li class="scroll-fade-in" data-scroll-delay="400"><a href="#projects" class="text-slide-link">
+                            <span class="text-content">
+                                <span class="text-visible">projects</span>
+                                <span class="text-hidden">projects</span>
+                            </span>
+                        </a></li>
+                        <li class="scroll-fade-in" data-scroll-delay="500"><a href="#contact" class="home-cta-button text-slide-link">
+                            <span class="text-content">
+                                <span class="text-visible">Let's Talk</span>
+                                <span class="text-hidden">Let's Talk</span>
+                            </span>
+                        </a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main class="home-main">
+                <section class="home-hero" id="home-hero">
+                    <div class="home-background-image scroll-scale-in" data-scroll-duration="1200" data-scroll-delay="300"></div>
+                    <div class="home-hero-text">
+                        <h1 class="home-solid scroll-slide-up" data-scroll-delay="600">HEY, I'M RICO</h1>
+                        <h1 class="home-outline scroll-slide-up" data-scroll-delay="800">HEY, I'M RICO</h1>
+                        <h1 class="home-solid scroll-slide-up" data-scroll-delay="1000">HEY, I'M RICO</h1>
+                    </div>
+                </section>
+            </main>
         </div>
     </section>
 
@@ -84,7 +164,77 @@
     <script src="js/pageSection.js"></script> 
     <script src="js/smooth-scroll.js"></script>
     <script src="js/cursor.js"></script>
-    <!-- Add hamburger menu script -->
+    
+    <!-- Hamburger Menu Script (standalone, no external file) -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, checking for hamburger elements...');
+        
+        // Get hamburger elements by ID to be more reliable
+        const hamburgerMenu = document.querySelector('.home-hamburger-menu');
+        const hamburgerIcon = document.querySelector('.home-hamburger-icon');
+        const navMenu = document.querySelector('.home-nav-menu');
+        
+        console.log('Found hamburger menu:', hamburgerMenu !== null);
+        console.log('Found hamburger icon:', hamburgerIcon !== null);
+        console.log('Found nav menu:', navMenu !== null);
+        
+        // Direct click handler on the hamburger element itself
+        if (hamburgerMenu) {
+            hamburgerMenu.addEventListener('click', function(e) {
+                console.log('Hamburger clicked!');
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (hamburgerIcon && navMenu) {
+                    hamburgerIcon.classList.toggle('home-open');
+                    navMenu.classList.toggle('home-active');
+                    document.body.classList.toggle('no-scroll');
+                }
+                return false;
+            });
+            
+            // Add direct inline handler as backup
+            hamburgerMenu.onclick = function(e) {
+                console.log('Hamburger clicked via onclick!');
+                e.stopPropagation();
+                
+                if (hamburgerIcon && navMenu) {
+                    hamburgerIcon.classList.toggle('home-open');
+                    navMenu.classList.toggle('home-active');
+                    document.body.classList.toggle('no-scroll');
+                }
+                return false;
+            };
+        }
+        
+        // Close menu when clicking navigation links
+        const navLinks = document.querySelectorAll('.home-nav-menu a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (hamburgerIcon && navMenu) {
+                    hamburgerIcon.classList.remove('home-open');
+                    navMenu.classList.remove('home-active');
+                    document.body.classList.remove('no-scroll');
+                }
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (navMenu && hamburgerMenu && 
+                navMenu.classList.contains('home-active') && 
+                !navMenu.contains(e.target) && 
+                !hamburgerMenu.contains(e.target)) {
+                if (hamburgerIcon) {
+                    hamburgerIcon.classList.remove('home-open');
+                }
+                navMenu.classList.remove('home-active');
+                document.body.classList.remove('no-scroll');
+            }
+        });
+    });
+    </script>
     
     <!-- Additional script to force image display -->
     <script>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Projects</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Fix CSS path to be consistent with index.html -->
     <link rel="stylesheet" href="css/project.css">
     <style>
         /* Dark mode for body and scrollbar */
@@ -27,6 +26,15 @@
         /* Force display of project components on all devices */
         .project-image, .project-tags, .project-footer, .project-link {
             display: block !important;
+        }
+        
+        /* Additional fallback styles */
+        .project-image {
+            background-color: #111111 !important; /* Black fallback for images */
+        }
+        
+        .image-failed {
+            position: relative;
         }
     </style>
 </head>
@@ -117,14 +125,40 @@
         </section>
     </div>
     
-    <!-- Add basic mobile detection script -->
+    <!-- Image fallback script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Force display of all important elements on mobile
+            // Function to handle background image loading errors
+            function checkBackgroundImages() {
+                const projectImages = document.querySelectorAll('.project-image[style*="background-image"]');
+                
+                projectImages.forEach(function(imageElement) {
+                    const url = imageElement.style.backgroundImage.match(/url\(['"]?([^'"]+)['"]?\)/);
+                    
+                    if (url && url[1]) {
+                        const img = new Image();
+                        img.onerror = function() {
+                            // Background image failed to load
+                            console.log('Background image failed to load:', url[1]);
+                            imageElement.classList.add('image-failed');
+                            
+                            // Remove the background image style and use the black fallback
+                            imageElement.style.backgroundImage = 'none';
+                        };
+                        img.src = url[1];
+                    }
+                });
+            }
+            
+            // Handle forcing display of project components
             const forceDisplayElements = document.querySelectorAll('.project-image, .project-tags, .project-footer, .project-link');
             forceDisplayElements.forEach(element => {
                 element.style.display = element.tagName === 'A' ? 'flex' : 'block';
+                element.style.visibility = 'visible';
             });
+            
+            // Check background images
+            setTimeout(checkBackgroundImages, 500); // Small delay to ensure styles are fully loaded
         });
     </script>
 </body>

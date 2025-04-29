@@ -98,14 +98,31 @@
     opacity: 0.4;
 }
 
+/* UPDATED: Image container with black fallback background */
 .project-image {
     width: 100%;
     height: 240px;
-    background-color: #252525;
+    background-color: #111111; /* Black fallback color - slightly lighter than pure black */
     position: relative;
     overflow: hidden;
     transition: transform 0.5s ease;
     display: block !important; /* Force display of images */
+    /* Default styling for when image fails to load */
+    position: relative;
+}
+
+/* Optional: Add a subtle pattern or gradient to the fallback */
+.project-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(45deg, #161616 25%, transparent 25%, transparent 50%, #161616 50%, #161616 75%, transparent 75%, transparent);
+    background-size: 10px 10px;
+    opacity: 0.05;
+    z-index: 0;
 }
 
 /* Fix for mobile background images */
@@ -125,6 +142,7 @@
     background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
     opacity: 0.6;
     transition: opacity 0.3s ease;
+    z-index: 1;
 }
 
 .project-card:hover .project-image {
@@ -239,6 +257,12 @@
 .project-icon {
     margin-right: 6px;
     display: inline-block !important; /* Force display */
+}
+
+/* Add a class for when image fails to load */
+.image-failed {
+    /* Additional styles for failed images if needed */
+    background-color: #111111 !important;
 }
 
 /* Animation for project cards */
@@ -469,6 +493,7 @@
         visibility: visible !important;
         width: 100% !important;
         min-height: 160px !important;
+        background-color: #111111 !important; /* Ensure black background on mobile */
     }
     
     /* Fix for nested elements getting hidden */

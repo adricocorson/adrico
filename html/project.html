@@ -2,19 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Projects</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/project.css">
+    <!-- Fix CSS path to be consistent with index.html -->
+    <link rel="stylesheet" href="css/project.css">
+    <style>
+        /* Dark mode for body and scrollbar */
+        body {
+            background-color: #161616;
+            color: #FFF7E9;
+            font-family: 'Manrope', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Ensure containers have proper spacing */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Force display of project components on all devices */
+        .project-image, .project-tags, .project-footer, .project-link {
+            display: block !important;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <!-- Projects Section -->
         <section class="section projects">
-            <div class="section-heading">
+            <div class="section-heading projects-heading">
                 <h1>PROJECTS</h1>
             </div>
-            <div class="section-content">
+            <div class="section-content projects-content">
                 <h2>my latest work.</h2>
                 <p>Below are some of the recent projects I've worked on. Each project represents a unique challenge and opportunity to apply my skills in web development and design.</p>
             </div>
@@ -93,5 +116,16 @@
             </div>
         </section>
     </div>
+    
+    <!-- Add basic mobile detection script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force display of all important elements on mobile
+            const forceDisplayElements = document.querySelectorAll('.project-image, .project-tags, .project-footer, .project-link');
+            forceDisplayElements.forEach(element => {
+                element.style.display = element.tagName === 'A' ? 'flex' : 'block';
+            });
+        });
+    </script>
 </body>
 </html>

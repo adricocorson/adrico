@@ -15,39 +15,11 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/dark-scrollbar.css">
     <link rel="stylesheet" href="css/cursor.css">
-    <!-- IMPORTANT: Make sure there's no reference to hamburger-menu.js anywhere in this file -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        /* Basic styles */
-        body { background-color: #161616; color: #FFF7E9; }
-        .pageSection { overflow-x: hidden; position: relative; }
-        
-        /* Enhanced hamburger menu styles for better mobile usability */
-        .home-hamburger-menu {
-            display: none;
-            cursor: pointer;
-            z-index: 999 !important; /* Ensure it's above everything */
-            padding: 20px !important; /* Larger touch target */
-            margin: -20px !important;
-            position: relative;
-        }
-
-        .home-hamburger-icon {
-            width: 30px;
-            height: 20px;
-            position: relative;
-            transform: rotate(0deg);
-            transition: .5s ease-in-out;
-            z-index: 999 !important; /* Ensure it's above everything */
-        }
-        
-        /* Force display on mobile */
-        @media (max-width: 1024px) {
-            .home-hamburger-menu {
-                display: block !important;
-            }
-        }
-        
+        /* ... (your existing styles) ... */
+        body { background-color: #161616; color: #FFF7E9; /* ... */ }
+        .pageSection { overflow-x: hidden; position: relative; /* ... */ }
         /* Fix for non-displaying elements on mobile */
         @media (max-width: 767px) {
             .project-image, .project-tags, .project-footer, .project-link {
@@ -77,7 +49,7 @@
     <!-- Custom Cursor Element -->
     <div class="cursor"></div>
     
-    <!-- Home section with complete header and main content -->
+    <!-- Keep this for home section only -->
     <section id="home" class="homeSection pageSection">
         <div class="home-noise-texture"></div>
         <div class="home-container">
@@ -86,7 +58,7 @@
                     <a href="#">rixco<sup>®</sup></a>
                 </div>
                 <nav class="home-nav">
-                    <div class="home-hamburger-menu" id="hamburger-menu" onclick="toggleMenu(event)">
+                    <div class="home-hamburger-menu" aria-label="Menu" role="button" tabindex="0">
                         <div class="home-hamburger-icon">
                             <span></span>
                             <span></span>
@@ -127,7 +99,6 @@
                     </ul>
                 </nav>
             </header>
-
             <main class="home-main">
                 <section class="home-hero" id="home-hero">
                     <div class="home-background-image scroll-scale-in" data-scroll-duration="1200" data-scroll-delay="300"></div>
@@ -161,89 +132,7 @@
         <div class="footer-container">...</div>
         <div class="footer-bottom">...</div>
     </footer>
-
     <script src="js/pageSection.js"></script> 
-    <script src="js/smooth-scroll.js"></script>
     <script src="js/cursor.js"></script>
-    
-    <!-- New Hamburger Menu Script (using direct toggleMenu function) -->
-    <script>
-    // Global hamburger variables
-    var hamburgerIcon = null;
-    var navMenu = null;
-    
-    // Toggle function called directly from HTML
-    function toggleMenu(e) {
-        console.log('Hamburger clicked via inline onclick!');
-        if (e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-        
-        // Get elements if not already retrieved
-        if (!hamburgerIcon) hamburgerIcon = document.querySelector('.home-hamburger-icon');
-        if (!navMenu) navMenu = document.querySelector('.home-nav-menu');
-        
-        // Toggle classes
-        if (hamburgerIcon && navMenu) {
-            hamburgerIcon.classList.toggle('home-open');
-            navMenu.classList.toggle('home-active');
-            document.body.classList.toggle('no-scroll');
-        }
-        
-        return false;
-    }
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM loaded, initializing hamburger menu...');
-        
-        // Initialize elements
-        hamburgerIcon = document.querySelector('.home-hamburger-icon');
-        navMenu = document.querySelector('.home-nav-menu');
-        
-        // Close menu when clicking navigation links
-        const navLinks = document.querySelectorAll('.home-nav-menu a');
-        navLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-                if (hamburgerIcon && navMenu) {
-                    hamburgerIcon.classList.remove('home-open');
-                    navMenu.classList.remove('home-active');
-                    document.body.classList.remove('no-scroll');
-                }
-            });
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (navMenu && 
-                navMenu.classList.contains('home-active') && 
-                !navMenu.contains(e.target) && 
-                !document.getElementById('hamburger-menu').contains(e.target)) {
-                if (hamburgerIcon) {
-                    hamburgerIcon.classList.remove('home-open');
-                }
-                navMenu.classList.remove('home-active');
-                document.body.classList.remove('no-scroll');
-            }
-        });
-    });
-    </script>
-    
-    <!-- Additional script to force image display -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Force display of project images, tags, and links on mobile
-            document.querySelectorAll('.project-image, .project-tags, .project-footer, .project-link').forEach(function(element) {
-                element.style.display = element.tagName === 'A' ? 'flex' : 'block';
-                element.style.visibility = 'visible';
-            });
-            
-            // Fix background images
-            document.querySelectorAll('.project-image[style*="background-image"]').forEach(function(element) {
-                const currentStyle = element.getAttribute('style');
-                element.setAttribute('style', currentStyle + '; background-size: cover !important; background-position: center !important; display: block !important;');
-            });
-        });
-    </script>
 </body>
 </html>

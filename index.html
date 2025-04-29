@@ -22,7 +22,29 @@
         /* ... (your existing styles) ... */
         body { background-color: #161616; color: #FFF7E9; /* ... */ }
         .pageSection { overflow-x: hidden; position: relative; /* ... */ }
-        /* ... */
+        /* Fix for non-displaying elements on mobile */
+        @media (max-width: 767px) {
+            .project-image, .project-tags, .project-footer, .project-link {
+                display: block !important;
+                visibility: visible !important;
+            }
+            .project-tags {
+                display: flex !important;
+            }
+            .project-tag {
+                display: inline-block !important;
+            }
+            .project-link {
+                display: flex !important;
+            }
+            
+            /* Additional style to prevent body scroll when menu is open */
+            body.no-scroll {
+                overflow: hidden;
+                position: fixed;
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body id="top">
@@ -62,5 +84,24 @@
     <script src="js/pageSection.js"></script> 
     <script src="js/smooth-scroll.js"></script>
     <script src="js/cursor.js"></script>
+    <!-- Add hamburger menu script -->
+    <script src="js/hamburger-menu.js"></script>
+    
+    <!-- Additional script to force image display -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force display of project images, tags, and links on mobile
+            document.querySelectorAll('.project-image, .project-tags, .project-footer, .project-link').forEach(function(element) {
+                element.style.display = element.tagName === 'A' ? 'flex' : 'block';
+                element.style.visibility = 'visible';
+            });
+            
+            // Fix background images
+            document.querySelectorAll('.project-image[style*="background-image"]').forEach(function(element) {
+                const currentStyle = element.getAttribute('style');
+                element.setAttribute('style', currentStyle + '; background-size: cover !important; background-position: center !important; display: block !important;');
+            });
+        });
+    </script>
 </body>
 </html>

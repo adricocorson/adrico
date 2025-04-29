@@ -83,7 +83,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex;
+    display: flex !important; /* Force display */
     flex-direction: column;
     height: 100%;
 }
@@ -105,7 +105,14 @@
     position: relative;
     overflow: hidden;
     transition: transform 0.5s ease;
-    display: block !important; /* Ensure visibility on all devices */
+    display: block !important; /* Force display of images */
+}
+
+/* Fix for mobile background images */
+.project-image[style*="background-image"] {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }
 
 .project-image::after {
@@ -126,7 +133,7 @@
 
 .project-content {
     padding: 1.2rem;
-    display: flex;
+    display: flex !important; /* Force display */
     flex-direction: column;
     height: 100%;
 }
@@ -165,10 +172,11 @@
 }
 
 .project-tags {
-    display: flex !important; /* Force display on all devices */
+    display: flex !important; /* Force display */
     flex-wrap: wrap;
     gap: 0.4rem;
     margin-bottom: 0.6rem;
+    visibility: visible !important; /* Ensure visibility */
 }
 
 .project-tag {
@@ -181,7 +189,7 @@
     letter-spacing: 0.5px;
     transition: background-color 0.3s ease, color 0.3s ease;
     font-family: 'Manrope', sans-serif;
-    display: inline-block !important; /* Force display on all devices */
+    display: inline-block !important; /* Force display */
 }
 
 .project-card:hover .project-tag {
@@ -190,11 +198,12 @@
 
 .project-footer {
     margin-top: auto;
-    display: block !important; /* Force display on all devices */
+    display: block !important; /* Force display */
+    visibility: visible !important; /* Ensure visibility */
 }
 
 .project-link {
-    display: flex !important; /* Force display on all devices */
+    display: flex !important; /* Force display */
     align-items: center;
     color: #FFF7E9;
     text-decoration: none;
@@ -205,6 +214,7 @@
     position: relative;
     margin-top: 0.7rem;
     font-family: 'Manrope', sans-serif;
+    visibility: visible !important; /* Ensure visibility */
 }
 
 .project-link::after {
@@ -228,6 +238,7 @@
 
 .project-icon {
     margin-right: 6px;
+    display: inline-block !important; /* Force display */
 }
 
 /* Animation for project cards */
@@ -307,7 +318,7 @@
         font-size: 1.3rem;
     }
     
-    /* Force display elements that might be hidden on mobile */
+    /* Force display elements on mobile */
     .project-tags,
     .project-tag,
     .project-footer,
@@ -365,7 +376,7 @@
         display: block !important; /* Force display on mobile */
     }
     
-    /* Force display elements that might be hidden on mobile */
+    /* Force display elements on mobile */
     .project-tags,
     .project-tag,
     .project-footer,
@@ -426,7 +437,7 @@
         display: block !important; /* Force display on mobile */
     }
     
-    /* Force display elements that might be hidden on mobile */
+    /* Force display elements on mobile */
     .project-tags,
     .project-tag,
     .project-footer,
@@ -448,4 +459,38 @@
     .project-card:nth-child(even) {
         animation-delay: 0.2s;
     }
+}
+
+/* Fix for mobile default styles */
+@media (max-width: 700px) {
+    /* Override any conflicting styles */
+    .project-image {
+        display: block !important;
+        visibility: visible !important;
+        width: 100% !important;
+        min-height: 160px !important;
+    }
+    
+    /* Fix for nested elements getting hidden */
+    .project-card * {
+        visibility: visible !important;
+        display: block;
+    }
+    
+    .project-tags {
+        display: flex !important;
+    }
+    
+    .project-tag {
+        display: inline-block !important;
+    }
+    
+    .project-link {
+        display: flex !important;
+    }
+}
+
+/* Additional no-display prevention */
+.hide-mobile {
+    display: block !important;
 }

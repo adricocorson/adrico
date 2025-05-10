@@ -1,11 +1,11 @@
 /* Projects section styles */
-.projectsSection {
+.projectsSection, .section.projects {
     position: relative;
     padding: 1rem 0;
     overflow: visible;
 }
 
-.projects-container {
+.projects-container, .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
@@ -20,7 +20,7 @@
     position: relative;
 }
 
-.projects-heading {
+.section-heading, .projects-heading {
     width: 100%;
     text-align: center;
     margin-bottom: 3rem;
@@ -28,7 +28,7 @@
     overflow: hidden;
 }
 
-.projects-heading h1 {
+.section-heading h1, .projects-heading h1 {
     font-size: 90px;
     font-weight: 600;
     color: #FFF7E9;
@@ -42,7 +42,7 @@
     font-family: 'Manrope', sans-serif;
 }
 
-.projects-content {
+.section-content, .projects-content {
     flex: 1;
     min-width: 300px;
     padding-right: 2rem;
@@ -51,7 +51,7 @@
     margin-left: 0;
 }
 
-.projects-content h2 {
+.section-content h2, .projects-content h2 {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1.2rem;
@@ -59,7 +59,7 @@
     font-family: 'Manrope', sans-serif;
 }
 
-.projects-content p {
+.section-content p, .projects-content p {
     font-size: 1rem;
     max-width: 600px;
     margin-bottom: 1.5rem;
@@ -83,7 +83,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex !important; /* Force display */
+    display: flex;
     flex-direction: column;
     height: 100%;
 }
@@ -98,20 +98,20 @@
     opacity: 0.4;
 }
 
-/* UPDATED: Image container with black fallback background */
+/* Fixed image container with proper background and fallback */
 .project-image {
     width: 100%;
     height: 240px;
-    background-color: #111111; /* Black fallback color - slightly lighter than pure black */
+    background-color: #111111;
     position: relative;
     overflow: hidden;
     transition: transform 0.5s ease;
-    display: block !important; /* Force display of images */
-    /* Default styling for when image fails to load */
-    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-/* Optional: Add a subtle pattern or gradient to the fallback */
+/* Pattern overlay for image container */
 .project-image::before {
     content: '';
     position: absolute;
@@ -123,13 +123,6 @@
     background-size: 10px 10px;
     opacity: 0.05;
     z-index: 0;
-}
-
-/* Fix for mobile background images */
-.project-image[style*="background-image"] {
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
 }
 
 .project-image::after {
@@ -151,9 +144,9 @@
 
 .project-content {
     padding: 1.2rem;
-    display: flex !important; /* Force display */
+    display: flex;
     flex-direction: column;
-    height: 100%;
+    flex: 1;
 }
 
 .project-title {
@@ -190,11 +183,10 @@
 }
 
 .project-tags {
-    display: flex !important; /* Force display */
+    display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
     margin-bottom: 0.6rem;
-    visibility: visible !important; /* Ensure visibility */
 }
 
 .project-tag {
@@ -207,7 +199,7 @@
     letter-spacing: 0.5px;
     transition: background-color 0.3s ease, color 0.3s ease;
     font-family: 'Manrope', sans-serif;
-    display: inline-block !important; /* Force display */
+    display: inline-block;
 }
 
 .project-card:hover .project-tag {
@@ -216,12 +208,11 @@
 
 .project-footer {
     margin-top: auto;
-    display: block !important; /* Force display */
-    visibility: visible !important; /* Ensure visibility */
+    display: block;
 }
 
 .project-link {
-    display: flex !important; /* Force display */
+    display: flex;
     align-items: center;
     color: #FFF7E9;
     text-decoration: none;
@@ -232,7 +223,6 @@
     position: relative;
     margin-top: 0.7rem;
     font-family: 'Manrope', sans-serif;
-    visibility: visible !important; /* Ensure visibility */
 }
 
 .project-link::after {
@@ -256,7 +246,7 @@
 
 .project-icon {
     margin-right: 6px;
-    display: inline-block !important; /* Force display */
+    display: inline-block;
 }
 
 /* Add a class for when image fails to load */
@@ -289,18 +279,18 @@
 .project-card:nth-child(5) { animation-delay: 0.7s; }
 .project-card:nth-child(6) { animation-delay: 0.85s; }
 
-/* Responsive styles */
+/* RESPONSIVE STYLES - FIXED FOR MOBILE */
 /* Small mobile devices (S) - 320px to 374px */
 @media (max-width: 374px) {
-    .projects-container {
+    .projects-container, .container {
         padding: 30px 15px;
     }
     
-    .projects-heading {
+    .projects-heading, .section-heading {
         margin-bottom: 35px;
     }
     
-    .projects-heading h1 {
+    .projects-heading h1, .section-heading h1 {
         font-size: 48px;
         padding: 0 10px;
         letter-spacing: -1px;
@@ -312,18 +302,18 @@
         gap: 25px;
     }
     
-    .projects-content {
+    .projects-content, .section-content {
         flex: 0 0 100%;
         padding-right: 0;
         margin-bottom: 20px;
     }
     
-    .projects-content h2 {
+    .projects-content h2, .section-content h2 {
         font-size: 26px;
         margin-bottom: 15px;
     }
     
-    .projects-content p {
+    .projects-content p, .section-content p {
         font-size: 16px;
         margin-bottom: 18px;
     }
@@ -348,20 +338,36 @@
     .project-footer,
     .project-link {
         display: flex !important;
+        visibility: visible !important;
+    }
+    
+    .project-tags {
+        display: flex !important;
+    }
+    
+    .project-tag {
+        display: inline-block !important;
+    }
+    
+    .project-link {
+        display: flex !important;
+        pointer-events: auto !important;
+        z-index: 10;
+        position: relative;
     }
 }
 
 /* Medium mobile devices (M) - 375px to 424px */
 @media (min-width: 375px) and (max-width: 424px) {
-    .projects-container {
+    .projects-container, .container {
         padding: 25px 15px;
     }
     
-    .projects-heading {
+    .projects-heading, .section-heading {
         margin-bottom: 30px;
     }
     
-    .projects-heading h1 {
+    .projects-heading h1, .section-heading h1 {
         font-size: 48px;
         padding: 0 10px;
         letter-spacing: -1px;
@@ -373,18 +379,18 @@
         gap: 25px;
     }
     
-    .projects-content {
+    .projects-content, .section-content {
         flex: 0 0 100%;
         padding-right: 0;
         margin-bottom: 15px;
     }
     
-    .projects-content h2 {
+    .projects-content h2, .section-content h2 {
         font-size: 26px;
         margin-bottom: 12px;
     }
     
-    .projects-content p {
+    .projects-content p, .section-content p {
         font-size: 15px;
         margin-bottom: 18px;
         max-width: 100%;
@@ -406,20 +412,36 @@
     .project-footer,
     .project-link {
         display: flex !important;
+        visibility: visible !important;
+    }
+    
+    .project-tags {
+        display: flex !important;
+    }
+    
+    .project-tag {
+        display: inline-block !important;
+    }
+    
+    .project-link {
+        display: flex !important;
+        pointer-events: auto !important;
+        z-index: 10;
+        position: relative;
     }
 }
 
-/* Large mobile devices (L) - 425px to 700px */
-@media (min-width: 425px) and (max-width: 700px) {
-    .projects-container {
+/* Large mobile devices (L) - 425px to 767px */
+@media (min-width: 425px) and (max-width: 767px) {
+    .projects-container, .container {
         padding: 30px 15px;
     }
     
-    .projects-heading {
+    .projects-heading, .section-heading {
         margin-bottom: 35px;
     }
     
-    .projects-heading h1 {
+    .projects-heading h1, .section-heading h1 {
         font-size: 60px;
         letter-spacing: -1px;
     }
@@ -430,18 +452,18 @@
         gap: 25px;
     }
     
-    .projects-content {
+    .projects-content, .section-content {
         flex: 0 0 100%;
         padding-right: 0;
         margin-bottom: 20px;
     }
     
-    .projects-content h2 {
+    .projects-content h2, .section-content h2 {
         font-size: 28px;
         margin-bottom: 15px;
     }
     
-    .projects-content p {
+    .projects-content p, .section-content p {
         font-size: 16px;
         margin-bottom: 20px;
         max-width: 100%;
@@ -467,11 +489,27 @@
     .project-footer,
     .project-link {
         display: flex !important;
+        visibility: visible !important;
+    }
+    
+    .project-tags {
+        display: flex !important;
+    }
+    
+    .project-tag {
+        display: inline-block !important;
+    }
+    
+    .project-link {
+        display: flex !important;
+        pointer-events: auto !important;
+        z-index: 10;
+        position: relative;
     }
 }
 
 /* Tablet and small desktop */
-@media (min-width: 701px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -483,10 +521,17 @@
     .project-card:nth-child(even) {
         animation-delay: 0.2s;
     }
+    
+    /* Ensure clickability */
+    .project-link {
+        pointer-events: auto !important;
+        z-index: 10;
+        position: relative;
+    }
 }
 
-/* Fix for mobile default styles */
-@media (max-width: 700px) {
+/* Fix for mobile default styles - CRITICAL FIX */
+@media (max-width: 767px) {
     /* Override any conflicting styles */
     .project-image {
         display: block !important;
@@ -512,10 +557,60 @@
     
     .project-link {
         display: flex !important;
+        pointer-events: auto !important;
+        z-index: 10;
+        position: relative;
+    }
+}
+
+/* Universal fixes for touch devices */
+@media (hover: none) {
+    .project-link {
+        padding: 8px 0 !important; /* Larger touch target */
+    }
+    
+    .project-tag {
+        padding: 0.35rem 0.8rem !important; /* Larger touch target */
+    }
+    
+    /* Fix for touch devices */
+    .project-link {
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2) !important;
+        touch-action: manipulation !important;
     }
 }
 
 /* Additional no-display prevention */
 .hide-mobile {
     display: block !important;
+}
+
+/* Dark mode for body and scrollbar */
+body {
+    background-color: #161616;
+    color: #FFF7E9;
+    font-family: 'Manrope', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Scrollbar styling for dark mode */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #444;
 }

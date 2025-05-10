@@ -6,37 +6,6 @@
     <title>Projects</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/project.css">
-    <style>
-        /* Dark mode for body and scrollbar */
-        body {
-            background-color: #161616;
-            color: #FFF7E9;
-            font-family: 'Manrope', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* Ensure containers have proper spacing */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        /* Force display of project components on all devices */
-        .project-image, .project-tags, .project-footer, .project-link {
-            display: block !important;
-        }
-        
-        /* Additional fallback styles */
-        .project-image {
-            background-color: #111111 !important; /* Black fallback for images */
-        }
-        
-        .image-failed {
-            position: relative;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -54,7 +23,7 @@
             <div class="projects-grid">
                 <!-- Project 1 - Vouch -->
                 <div class="project-card">
-                    <div class="project-image vouch-image" style="background-image: url('images/vouch.png'); background-size: cover; background-position: center;"></div>
+                    <div class="project-image vouch-image" style="background-image: url('images/vouch.png');"></div>
                     <div class="project-content">
                         <h3 class="project-title">Vouch</h3>
                         <p class="project-description">This is for UM hackathon, a project developed during a university competition to solve real-world challenges.</p>
@@ -78,7 +47,7 @@
                 
                 <!-- Project 2 (GitHub Portfolio) -->
                 <div class="project-card">
-                    <div class="project-image portfolio-image" style="background-image: url('images/portofolio.png'); background-size: cover; background-position: center;"></div>
+                    <div class="project-image portfolio-image" style="background-image: url('images/portofolio.png');"></div>
                     <div class="project-content">
                         <h3 class="project-title">Personal Portfolio</h3>
                         <p class="project-description">My personal portfolio repository showcasing various coding projects and development work.</p>
@@ -100,7 +69,7 @@
                 
                 <!-- Project 3 - AI Image Generator -->
                 <div class="project-card">
-                    <div class="project-image" style="background-image: url('images/ai.PNG'); background-size: cover; background-position: center;"></div>
+                    <div class="project-image" style="background-image: url('images/ai.PNG');"></div>
                     <div class="project-content">
                         <h3 class="project-title">AI Image Generator</h3>
                         <p class="project-description">An innovative tool that uses artificial intelligence to generate custom images based on text prompts and user specifications.</p>
@@ -125,7 +94,7 @@
         </section>
     </div>
     
-    <!-- Image fallback script -->
+    <!-- Mobile display fix script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Function to handle background image loading errors
@@ -150,16 +119,134 @@
                 });
             }
             
-            // Handle forcing display of project components
-            const forceDisplayElements = document.querySelectorAll('.project-image, .project-tags, .project-footer, .project-link');
-            forceDisplayElements.forEach(element => {
-                element.style.display = element.tagName === 'A' ? 'flex' : 'block';
-                element.style.visibility = 'visible';
-            });
+            // Fix for mobile project display issues
+            function fixMobileProjectDisplay() {
+                // Target all project elements that should be displayed
+                const projectElements = document.querySelectorAll(
+                    '.project-image, .project-content, .project-title, ' +
+                    '.project-description, .project-tags, .project-tag, ' +
+                    '.project-footer, .project-link'
+                );
+                
+                // Force display and visibility
+                projectElements.forEach(element => {
+                    // Set appropriate display type based on element
+                    if (element.classList.contains('project-tags')) {
+                        element.style.display = 'flex';
+                    } else if (element.classList.contains('project-tag')) {
+                        element.style.display = 'inline-block';
+                    } else if (element.classList.contains('project-link')) {
+                        element.style.display = 'flex';
+                        // Improve clickability
+                        element.style.position = 'relative';
+                        element.style.zIndex = '10';
+                        element.style.pointerEvents = 'auto';
+                    } else {
+                        element.style.display = 'block';
+                    }
+                    
+                    // Ensure visibility and opacity
+                    element.style.visibility = 'visible';
+                    element.style.opacity = '1';
+                });
+                
+                // Fix background images for project cards
+                const projectImages = document.querySelectorAll('.project-image[style*="background-image"]');
+                projectImages.forEach(image => {
+                    image.style.backgroundSize = 'cover';
+                    image.style.backgroundPosition = 'center';
+                    image.style.backgroundRepeat = 'no-repeat';
+                });
+                
+                // Fix clickable links - add extra click handling for mobile
+                const projectLinks = document.querySelectorAll('.project-link');
+                projectLinks.forEach(link => {
+                    // Get the URL and target attributes
+                    const href = link.getAttribute('href');
+                    const target = link.getAttribute('target');
+                    
+                    // Only add these listeners once
+                    if (!link.hasAttribute('data-enhanced')) {
+                        link.setAttribute('data-enhanced', 'true');
+                        
+                        link.addEventListener('touchstart', function() {
+                            this.style.opacity = '0.8';
+                        });
+                        
+                        link.addEventListener('touchend', function() {
+                            this.style.opacity = '1';
+                            // Small delay to show the touch feedback before navigating
+                            setTimeout(() => {
+                                if (target === '_blank') {
+                                    window.open(href, '_blank');
+                                } else {
+                                    window.location.href = href;
+                                }
+                            }, 50);
+                        });
+                    }
+                });
+            }
+
+            // Call both fix functions
+            checkBackgroundImages();
+            fixMobileProjectDisplay();
             
-            // Check background images
-            setTimeout(checkBackgroundImages, 500); // Small delay to ensure styles are fully loaded
+            // Also call on window resize to ensure it works after orientation changes
+            window.addEventListener('resize', fixMobileProjectDisplay);
+            
+            // Call again after a delay to ensure all styles are applied
+            setTimeout(fixMobileProjectDisplay, 500);
         });
     </script>
+    
+    <!-- Additional style to ensure display on mobile -->
+    <style>
+        /* Dark mode for body and scrollbar */
+        body {
+            background-color: #161616;
+            color: #FFF7E9;
+            font-family: 'Manrope', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Ensure containers have proper spacing */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Additional mobile fixes directly in HTML */
+        @media (max-width: 767px) {
+            .project-image, 
+            .project-content, 
+            .project-title, 
+            .project-description, 
+            .project-footer, 
+            .project-tags, 
+            .project-link {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            }
+            
+            .project-tags {
+                display: flex !important;
+            }
+            
+            .project-tag {
+                display: inline-block !important;
+            }
+            
+            .project-link {
+                display: flex !important;
+                pointer-events: auto !important;
+                z-index: 10;
+                position: relative;
+            }
+        }
+    </style>
 </body>
 </html>

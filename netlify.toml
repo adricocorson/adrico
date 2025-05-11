@@ -1,0 +1,55 @@
+# netlify.toml
+# Place this file in the root directory (same location as your index.html)
+
+# Global settings
+[build]
+  publish = "."  # Use the current directory as the publish directory
+  command = ""   # No build command needed for static HTML sites
+
+# Custom headers to solve path issues
+[[headers]]
+  for = "/*"
+    [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Access-Control-Allow-Origin = "*"
+
+# Specific headers for CSS files
+[[headers]]
+  for = "/css/*.css"
+    [headers.values]
+    Content-Type = "text/css"
+
+# Specific headers for JS files
+[[headers]]
+  for = "/js/*.js"
+    [headers.values]
+    Content-Type = "text/javascript"
+
+# Specific headers for images
+[[headers]]
+  for = "/images/*.png"
+    [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/images/*.jpg"
+    [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/images/*.gif"
+    [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Special redirects for HTML files in the html directory
+[[redirects]]
+  from = "/html/*"
+  to = "/html/:splat"
+  status = 200
+
+# Handle SPA routing if needed
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false

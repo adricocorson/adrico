@@ -1,44 +1,61 @@
 /**
- * Custom Cursor Styles
+ * Custom Cursor Styles - Improved for Netlify
  */
 
- html, body {
+/* Only apply custom cursor on non-touch devices */
+@media (pointer: fine) {
+  html, body {
     cursor: none !important;
   }
   
   * {
     cursor: none !important;
   }
-  
+}
+
+/* Base cursor style */
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: #aaa98a;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mix-blend-mode: difference;
+  will-change: transform, width, height;
+}
+
+/* Expanded cursor style for hovering over links/buttons */
+.cursor.expanded {
+  width: 50px;
+  height: 50px;
+  background-color: #aaa98a;
+  mix-blend-mode: normal;
+}
+
+/* Arrow SVG styling */
+.arrow-svg {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cursor.expanded .arrow-svg {
+  opacity: 1;
+}
+
+/* Hide cursor on smaller screens and touch devices */
+@media (max-width: 768px), (pointer: coarse) {
   .cursor {
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    background-color: #aaa98a;
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s ease, height 0.2s ease;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    mix-blend-mode: difference;
-    will-change: transform, width, height;
+    display: none !important;
   }
   
-  .cursor.expanded {
-    width: 50px;
-    height: 50px;
-    background-color: #aaa98a;
-    mix-blend-mode: normal;
+  html, body, * {
+    cursor: auto !important;
   }
-  
-  .arrow-svg {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-  
-  .cursor.expanded .arrow-svg {
-    opacity: 1;
-  }
+}

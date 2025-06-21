@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>rixco</title>
+    <title>rixco - Home</title>
+    <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/home.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -12,53 +13,9 @@
     <div class="home-noise-texture"></div>
     
     <div class="home-container">
-        <header class="home-header scroll-fade-in" data-scroll-duration="1000">
-            <div class="home-logo">
-                <a href="#">rixco<sup>®</sup></a>
-            </div>
-            <nav class="home-nav">
-                <div class="home-hamburger-menu" aria-label="Menu" role="button" tabindex="0">
-                    <div class="home-hamburger-icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-                <ul class="home-nav-menu">
-                    <li class="scroll-fade-in" data-scroll-delay="100"><a href="#home" class="text-slide-link">
-                        <span class="text-content">
-                            <span class="text-visible">home</span>
-                            <span class="text-hidden">home</span>
-                        </span>
-                    </a></li>
-                    <li class="scroll-fade-in" data-scroll-delay="200"><a href="#about" class="text-slide-link">
-                        <span class="text-content">
-                            <span class="text-visible">about</span>
-                            <span class="text-hidden">about</span>
-                        </span>
-                    </a></li>
-                    <li class="scroll-fade-in" data-scroll-delay="300"><a href="#services" class="text-slide-link">
-                        <span class="text-content">
-                            <span class="text-visible">services</span>
-                            <span class="text-hidden">services</span>
-                        </span>
-                    </a></li>
-                    <li class="scroll-fade-in" data-scroll-delay="400"><a href="#projects" class="text-slide-link">
-                        <span class="text-content">
-                            <span class="text-visible">projects</span>
-                            <span class="text-hidden">projects</span>
-                        </span>
-                    </a></li>
-                    <li class="scroll-fade-in" data-scroll-delay="500"><a href="#contact" class="home-cta-button text-slide-link">
-                        <span class="text-content">
-                            <span class="text-visible">Let's Talk</span>
-                            <span class="text-hidden">Let's Talk</span>
-                        </span>
-                    </a></li>
-                </ul>
-            </nav>
-        </header>
-
+        <!-- Header would be included here -->
+        <!-- You can include it via server-side includes, JavaScript, or copy the header HTML -->
+        
         <main class="home-main">
             <section class="home-hero" id="home">
                 <div class="home-background-image scroll-scale-in" data-scroll-duration="1200" data-scroll-delay="300"></div>
@@ -70,92 +27,5 @@
             </section>
         </main>
     </div>
-
-    <!-- Fixed Hamburger Menu JavaScript - Runs immediately without waiting for DOMContentLoaded -->
-    <script>
-        // Run immediately instead of waiting for DOMContentLoaded
-        (function() {
-            console.log('Initializing hamburger menu');
-            
-            // Get hamburger menu elements
-            const hamburgerMenu = document.querySelector('.home-hamburger-menu');
-            const hamburgerIcon = document.querySelector('.home-hamburger-icon');
-            const navMenu = document.querySelector('.home-nav-menu');
-            
-            // Debug - log elements to console
-            console.log('Menu elements found:', { 
-                hamburgerMenu: hamburgerMenu ? 'yes' : 'no', 
-                hamburgerIcon: hamburgerIcon ? 'yes' : 'no', 
-                navMenu: navMenu ? 'yes' : 'no'
-            });
-            
-            // Toggle menu function
-            function toggleMenu() {
-                console.log('Toggling menu');
-                if (hamburgerIcon && navMenu) {
-                    hamburgerIcon.classList.toggle('home-open');
-                    navMenu.classList.toggle('home-active');
-                    document.body.classList.toggle('no-scroll');
-                }
-            }
-            
-            // Setup event listeners if all elements exist
-            if (hamburgerMenu && hamburgerIcon && navMenu) {
-                // Mouse click event
-                hamburgerMenu.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Prevent document click handler from firing immediately
-                    toggleMenu();
-                });
-                
-                // Touch events with improved handling
-                hamburgerMenu.addEventListener('touchstart', (e) => {
-                    // Prevent default to avoid delays on some mobile browsers
-                    e.preventDefault();
-                }, { passive: false });
-                
-                hamburgerMenu.addEventListener('touchend', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleMenu();
-                }, { passive: false });
-                
-                // Keyboard accessibility
-                hamburgerMenu.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        toggleMenu();
-                    }
-                });
-                
-                // Close menu when clicking a navigation link
-                const navLinks = document.querySelectorAll('.home-nav-menu a');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        hamburgerIcon.classList.remove('home-open');
-                        navMenu.classList.remove('home-active');
-                        document.body.classList.remove('no-scroll');
-                    });
-                });
-                
-                // Close menu when clicking outside of it
-                document.addEventListener('click', (e) => {
-                    // First check if both elements exist and menu is active
-                    if (navMenu && hamburgerMenu && navMenu.classList.contains('home-active')) {
-                        // Only then check if click is outside menu and hamburger
-                        if (!navMenu.contains(e.target) && !hamburgerMenu.contains(e.target)) {
-                            console.log('Clicked outside menu, closing it');
-                            hamburgerIcon.classList.remove('home-open');
-                            navMenu.classList.remove('home-active');
-                            document.body.classList.remove('no-scroll');
-                        }
-                    }
-                });
-                
-                console.log('Hamburger menu initialized successfully');
-            } else {
-                console.error('Could not initialize hamburger menu - missing elements');
-            }
-        })();
-    </script>
 </body>
 </html>

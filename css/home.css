@@ -27,15 +27,7 @@ body {
     background-color: var(--home-dark-bg);
     color: var(--home-light-text);
     line-height: 1.6;
-    position: relative; /* Added for proper positioning */
-}
-
-/* Add no-scroll class for body */
-body.no-scroll {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-    height: 100%;
+    position: relative;
 }
 
 /* Noise texture effect */
@@ -70,129 +62,6 @@ body.no-scroll {
     z-index: 1; /* Above noise texture */
 }
 
-/* Header Styles */
-.home-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 0;
-    width: 100%;
-    z-index: 10;
-    animation: fadeInUp 0.8s ease-out forwards;
-    animation-delay: 0.2s;
-    opacity: 0;
-}
-
-.home-logo a {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--home-light-text);
-    text-decoration: none;
-}
-
-.home-logo sup {
-    font-size: 0.6rem;
-    vertical-align: super;
-}
-
-.home-nav {
-    display: flex;
-    align-items: center;
-    position: relative;
-    z-index: 100; /* Higher z-index for menu */
-}
-
-.home-nav ul.home-nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2.5rem;
-    align-items: center;
-    transition: right 0.3s ease-in-out; /* Smoother animation */
-}
-
-.home-nav a {
-    color: var(--home-light-text);
-    text-decoration: none;
-    font-size: 1rem;
-    transition: opacity 0.3s ease;
-}
-
-.home-nav a:hover {
-    opacity: 0.7;
-}
-
-.home-cta-button {
-    background-color: var(--home-light-text);
-    color: var(--home-dark-bg) !important; /* Added !important to ensure text color applies */
-    padding: 0.7rem 1.5rem;
-    border-radius: 2rem;
-    font-weight: 700; /* Increased font weight for better visibility */
-    transition: all 0.3s ease;
-}
-
-.home-cta-button:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-}
-
-/* Hamburger Menu - UPDATED */
-.home-hamburger-menu {
-    display: none;
-    cursor: pointer;
-    z-index: 110; /* Higher z-index for menu toggler */
-    padding: 10px; /* Increase tappable area */
-    margin: -10px; /* Offset padding to maintain visual appearance */
-}
-
-.home-hamburger-icon {
-    width: 30px;
-    height: 20px;
-    position: relative;
-    transform: rotate(0deg);
-    transition: .5s ease-in-out;
-    z-index: 120; /* Even higher z-index */
-}
-
-.home-hamburger-icon span {
-    display: block;
-    position: absolute;
-    height: 2px;
-    width: 100%;
-    background: var(--home-light-text);
-    border-radius: 9px;
-    opacity: 1;
-    left: 0;
-    transform: rotate(0deg);
-    transition: .25s ease-in-out;
-}
-
-.home-hamburger-icon span:nth-child(1) {
-    top: 0px;
-}
-
-.home-hamburger-icon span:nth-child(2) {
-    top: 9px;
-}
-
-.home-hamburger-icon span:nth-child(3) {
-    top: 18px;
-}
-
-.home-hamburger-icon.home-open span:nth-child(1) {
-    top: 9px;
-    transform: rotate(135deg);
-}
-
-.home-hamburger-icon.home-open span:nth-child(2) {
-    opacity: 0;
-    left: -60px;
-}
-
-.home-hamburger-icon.home-open span:nth-child(3) {
-    top: 9px;
-    transform: rotate(-135deg);
-}
-
 /* Hero Section */
 .home-main {
     flex: 1;
@@ -208,7 +77,7 @@ body.no-scroll {
     position: relative;
 }
 
-/* Background Image - FIXED POSITIONING */
+/* Background Image */
 .home-background-image {
     position: absolute;
     top: 0;
@@ -306,116 +175,12 @@ section {
     z-index: 1;
 }
 
-/* -------------------------- */
-/* TEXT SLIDE UP ANIMATION */
-/* -------------------------- */
-
-/* Common styles for all animated links */
-.text-slide-link {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-    text-decoration: none;
-    padding: 2px 0;
-    cursor: pointer;
-}
-
-.text-slide-link .text-content {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-}
-
-.text-slide-link .text-visible {
-    display: block;
-    transform: translateY(0);
-    transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.text-slide-link .text-hidden {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    display: block;
-    transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.text-slide-link:hover .text-visible {
-    transform: translateY(-100%);
-}
-
-.text-slide-link:hover .text-hidden {
-    transform: translateY(-100%);
-}
-
-/* Override default link hover styles when using text-slide-link */
-.home-nav a.text-slide-link:hover {
-    opacity: 1;
-}
-
-/* Special styling for CTA button with text slide */
-.home-cta-button.text-slide-link {
-    padding: 0.7rem 1.5rem;
-    overflow: hidden;
-    text-align: center;
-}
-
-.home-cta-button.text-slide-link .text-content {
-    color: var(--home-dark-bg);
-}
-
-.home-cta-button.text-slide-link:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-}
-
-/* Debug styles - uncomment if needed */
-/* 
-.debug-outline .home-hamburger-menu {
-    background-color: rgba(255, 0, 0, 0.2);
-}
-*/
-
 /* Responsive styles */
 /* Large mobile screens and tablets (up to 1024px) */
 @media (max-width: 1024px) {
     :root {
         --home-bg-image-width: 63%;
         --home-bg-image-height: 63%;
-    }
-
-    .home-nav ul.home-nav-menu {
-        gap: 1.5rem;
-    }
-    
-    .home-hamburger-menu {
-        display: block !important; /* Force display on mobile */
-    }
-    
-    .home-nav ul.home-nav-menu {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        right: -100% !important; /* Ensure menu starts off-screen */
-        width: 250px;
-        height: 100vh;
-        background-color: var(--home-dark-bg);
-        padding: 6rem 2rem 2rem;
-        gap: 2rem;
-        transition: right 0.3s ease;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-        z-index: 50;
-    }
-    
-    .home-nav ul.home-nav-menu.home-active {
-        right: 0 !important; /* Force on-screen when active */
-    }
-    
-    /* Adjust text slide animation for mobile */
-    .home-nav-menu a.text-slide-link {
-        width: auto;
-        display: inline-block;
     }
 }
 
@@ -424,14 +189,6 @@ section {
     :root {
         --home-bg-image-width: 60%;
         --home-bg-image-height: 60%;
-    }
-
-    .home-hamburger-menu {
-        display: block !important;
-    }
-    
-    .home-nav ul.home-nav-menu {
-        width: 220px;
     }
     
     .home-hero-text h1 {
@@ -454,20 +211,6 @@ section {
         padding: 0 1rem;
     }
     
-    .home-header {
-        padding: 1.5rem 0;
-    }
-    
-    .home-logo a {
-        font-size: 1.2rem;
-    }
-    
-    .home-nav ul.home-nav-menu {
-        width: 100%;
-        right: -100% !important;
-        padding: 5rem 1.5rem 1.5rem;
-    }
-    
     .home-hero-text h1 {
         font-size: clamp(3rem, 5vw, 2.5rem);
     }
@@ -484,20 +227,6 @@ section {
         padding: 0 1rem;
     }
     
-    .home-header {
-        padding: 1.5rem 0;
-    }
-    
-    .home-logo a {
-        font-size: 1.2rem;
-    }
-    
-    .home-nav ul.home-nav-menu {
-        width: 100%;
-        right: -100% !important;
-        padding: 5rem 1.5rem 1.5rem;
-    }
-    
     .home-hero-text h1 {
         font-size: clamp(2.5rem, 5vw, 2.5rem);
     }
@@ -512,20 +241,6 @@ section {
 
     .home-container {
         padding: 0 1rem;
-    }
-    
-    .home-header {
-        padding: 1.5rem 0;
-    }
-    
-    .home-logo a {
-        font-size: 1.2rem;
-    }
-    
-    .home-nav ul.home-nav-menu {
-        width: 100%;
-        right: -100% !important;
-        padding: 5rem 1.5rem 1.5rem;
     }
     
     .home-hero-text h1 {

@@ -10,14 +10,14 @@
     <!-- Load jQuery first for better compatibility -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Load your stylesheets -->
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/about.css">
-    <link rel="stylesheet" href="css/skills.css">
-    <link rel="stylesheet" href="css/project.css">
-    <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/dark-scrollbar.css">
-    <link rel="stylesheet" href="css/cursor.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="/css/skills.css">
+    <link rel="stylesheet" href="/css/project.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/cursor.css">
     <style>
         /* ... (your existing styles) ... */
         body { background-color: #161616; color: #FFF7E9; /* ... */ }
@@ -51,181 +51,27 @@
     <!-- Custom Cursor Element -->
     <div class="cursor"></div>
     
-    <!-- Keep this for home section only -->
-    <section id="home" class="homeSection pageSection">
-        <div class="home-noise-texture"></div>
-        <div class="home-container">
-            <header class="home-header scroll-fade-in" data-scroll-duration="1000">
-                <div class="home-logo">
-                    <a href="#">rixco<sup>®</sup></a>
-                </div>
-                <nav class="home-nav">
-                    <div class="home-hamburger-menu" aria-label="Menu" role="button" tabindex="0">
-                        <div class="home-hamburger-icon">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                    <ul class="home-nav-menu">
-                        <li class="scroll-fade-in" data-scroll-delay="100"><a href="#home" class="text-slide-link">
-                            <span class="text-content">
-                                <span class="text-visible">home</span>
-                                <span class="text-hidden">home</span>
-                            </span>
-                        </a></li>
-                        <li class="scroll-fade-in" data-scroll-delay="200"><a href="#about" class="text-slide-link">
-                            <span class="text-content">
-                                <span class="text-visible">about</span>
-                                <span class="text-hidden">about</span>
-                            </span>
-                        </a></li>
-                        <li class="scroll-fade-in" data-scroll-delay="300"><a href="#services" class="text-slide-link">
-                            <span class="text-content">
-                                <span class="text-visible">services</span>
-                                <span class="text-hidden">services</span>
-                            </span>
-                        </a></li>
-                        <li class="scroll-fade-in" data-scroll-delay="400"><a href="#projects" class="text-slide-link">
-                            <span class="text-content">
-                                <span class="text-visible">projects</span>
-                                <span class="text-hidden">projects</span>
-                            </span>
-                        </a></li>
-                        <li class="scroll-fade-in" data-scroll-delay="500"><a href="#contact" class="home-cta-button text-slide-link">
-                            <span class="text-content">
-                                <span class="text-visible">Let's Talk</span>
-                                <span class="text-hidden">Let's Talk</span>
-                            </span>
-                        </a></li>
-                    </ul>
-                </nav>
-            </header>
-            <main class="home-main">
-                <section class="home-hero" id="home-hero">
-                    <div class="home-background-image scroll-scale-in" data-scroll-duration="1200" data-scroll-delay="300"></div>
-                    <div class="home-hero-text">
-                        <h1 class="home-solid scroll-slide-up" data-scroll-delay="600">HEY, I'M RICO</h1>
-                        <h1 class="home-outline scroll-slide-up" data-scroll-delay="800">HEY, I'M RICO</h1>
-                        <h1 class="home-solid scroll-slide-up" data-scroll-delay="1000">HEY, I'M RICO</h1>
-                    </div>
-                </section>
-            </main>
-        </div>
-    </section>
+    <!-- Separate Header Section -->
+    <header class="headerSection"></header>
+    
+    <!-- Home Section without header -->
+    <section id="home" class="homeSection pageSection"></section>
 
-    <section id="about" class="aboutSection pageSection">
-        <div class="about-container">...</div>
-    </section>
+    <section id="about" class="aboutSection pageSection"></section>
 
-    <section id="services" class="skillsSection pageSection">
-        <div class="container">...</div>
-    </section>
+    <section id="services" class="skillsSection pageSection"></section>
 
-    <section id="projects" class="projectsSection pageSection">
-        <div class="projects-container">...</div>
-    </section>
+    <section id="projects" class="projectsSection pageSection"></section>
 
-    <section id="contact" class="contactSection pageSection">
-        <div class="contact-wrapper">...</div>
-    </section>
+    <section id="contact" class="contactSection pageSection"></section>
 
-    <footer id="footer" class="footerSection pageSection">
-        <div class="footer-container">...</div>
-        <div class="footer-bottom">...</div>
-    </footer>
+    <footer class="footerSection"></footer>
+    
 
     <!-- Load your scripts at the end of the body -->
-    <script src="js/pageSection.js"></script>
-    <script src="js/cursor.js"></script>
-    
-    <!-- Fallback cursor implementation in case the main one fails -->
-    <script>
-        // Check if cursor.js failed to load or initialize properly
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const cursor = document.querySelector('.cursor');
-                if (cursor && window.getComputedStyle(cursor).display !== 'none' && 
-                    !cursor.classList.contains('initialized')) {
-                    console.log('Cursor not initialized properly, activating fallback');
-                    
-                    // Mark the cursor as initialized to prevent multiple initializations
-                    cursor.classList.add('initialized');
-                    
-                    // Simple fallback cursor implementation
-                    const simpleCursor = function() {
-                        // Detect if we're on a touch device
-                        const isTouchDevice = 'ontouchstart' in window || 
-                                            navigator.maxTouchPoints > 0 || 
-                                            window.matchMedia("(pointer: coarse)").matches;
-                        
-                        // Don't apply custom cursor on touch devices
-                        if (isTouchDevice) {
-                            cursor.style.display = 'none';
-                            return;
-                        }
-                        
-                        // Create arrow SVG if it doesn't exist
-                        if (!document.querySelector('.cursor .arrow-svg')) {
-                            const svgNS = "http://www.w3.org/2000/svg";
-                            const svg = document.createElementNS(svgNS, "svg");
-                            svg.setAttribute("viewBox", "0 0 14 15");
-                            svg.setAttribute("fill", "none");
-                            svg.setAttribute("class", "arrow-svg");
-                            svg.setAttribute("width", "32");
-                            svg.setAttribute("height", "32");
-                            svg.setAttribute("aria-hidden", "true");
-                            
-                            const path = document.createElementNS(svgNS, "path");
-                            path.setAttribute("d", "M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z");
-                            path.setAttribute("fill", "currentColor");
-                            
-                            svg.appendChild(path);
-                            cursor.appendChild(svg);
-                            
-                            svg.style.position = 'absolute';
-                            svg.style.top = '50%';
-                            svg.style.left = '50%';
-                            svg.style.transform = 'translate(-50%, -50%)';
-                            svg.style.opacity = '0';
-                        }
-                        
-                        // Track mouse movement
-                        document.addEventListener('mousemove', function(e) {
-                            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-                        });
-                        
-                        // Add hover effects to clickable elements
-                        document.querySelectorAll('a, button, .home-hamburger-menu, .text-slide-link, .home-cta-button, [role="button"]').forEach(el => {
-                            el.addEventListener('mouseenter', function() {
-                                cursor.classList.add('expanded');
-                                const svg = document.querySelector('.cursor .arrow-svg');
-                                if (svg) svg.style.opacity = '1';
-                            });
-                            
-                            el.addEventListener('mouseleave', function() {
-                                cursor.classList.remove('expanded');
-                                const svg = document.querySelector('.cursor .arrow-svg');
-                                if (svg) svg.style.opacity = '0';
-                            });
-                        });
-                        
-                        // Handle window events
-                        window.addEventListener('mouseleave', function() {
-                            cursor.style.opacity = '0';
-                        });
-                        
-                        window.addEventListener('mouseenter', function() {
-                            cursor.style.opacity = '1';
-                        });
-                        
-                        console.log('Fallback cursor activated');
-                    };
-                    
-                    simpleCursor();
-                }
-            }, 1000); // Check after 1 second to allow normal initialization time
-        });
-    </script>
+    <script src="/js/pageSection.js"></script>
+    <script src="/js/cursor.js"></script>
+
+    <!-- Your existing fallback cursor script... -->
 </body>
 </html>

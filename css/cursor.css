@@ -1,16 +1,49 @@
 /**
- * Custom Cursor Styles - Improved for Netlify
+ * Custom Cursor Styles - Complete custom cursor only
  */
 
-/* Only apply custom cursor on non-touch devices */
-@media (pointer: fine) {
-  html, body {
-    cursor: none !important;
-  }
-  
-  * {
-    cursor: none !important;
-  }
+/* Force hide default cursor everywhere */
+html, body {
+  cursor: none !important;
+}
+
+* {
+  cursor: none !important;
+}
+
+*:hover {
+  cursor: none !important;
+}
+
+/* Hide cursor on all interactive elements */
+a, button, input, textarea, select, [role="button"] {
+  cursor: none !important;
+}
+
+/* Hide cursor on scrollbar elements */
+::-webkit-scrollbar {
+  cursor: none !important;
+}
+
+::-webkit-scrollbar-thumb {
+  cursor: none !important;
+}
+
+::-webkit-scrollbar-track {
+  cursor: none !important;
+}
+
+::-webkit-scrollbar-corner {
+  cursor: none !important;
+}
+
+::-webkit-scrollbar-button {
+  cursor: none !important;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  cursor: none !important;
 }
 
 /* Base cursor style */
@@ -43,13 +76,19 @@
 .arrow-svg {
   opacity: 0;
   transition: opacity 0.2s ease;
+  display: block;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .cursor.expanded .arrow-svg {
   opacity: 1;
 }
 
-/* Hide cursor on smaller screens and touch devices */
+/* Force hide cursor on mobile and show custom cursor on desktop */
 @media (max-width: 768px), (pointer: coarse) {
   .cursor {
     display: none !important;
@@ -57,5 +96,26 @@
   
   html, body, * {
     cursor: auto !important;
+  }
+}
+
+/* Additional force overrides for stubborn elements */
+@media (pointer: fine) {
+  /* Force override any other cursor styles */
+  body * {
+    cursor: none !important;
+  }
+  
+  /* Target common interactive elements specifically */
+  nav, nav *, header, header *, main, main *, footer, footer *, 
+  .menu, .menu *, .nav, .nav *, .header, .header *,
+  .button, .btn, .link, .anchor {
+    cursor: none !important;
+  }
+  
+  /* Target your specific classes */
+  .home-hamburger-menu, .text-slide-link, .home-cta-button,
+  .project-link, .contact-button {
+    cursor: none !important;
   }
 }

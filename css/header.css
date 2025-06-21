@@ -1,0 +1,330 @@
+:root {
+    --home-dark-bg: #161616;
+    --home-light-text: #FFF7E9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all .2s ease-in;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--home-dark-bg);
+    color: var(--home-light-text);
+    line-height: 1.6;
+    position: relative;
+}
+
+/* Add no-scroll class for body when mobile menu is open */
+body.no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* Header Styles */
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    z-index: 10;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
+.home-logo a {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--home-light-text);
+    text-decoration: none;
+}
+
+.home-logo sup {
+    font-size: 0.5rem;
+    vertical-align: super;
+}
+
+.home-nav {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+}
+
+.home-nav ul.home-nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    align-items: center;
+    transition: right 0.3s ease-in-out;
+}
+
+.home-nav a {
+    color: var(--home-light-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.3rem 0.5rem;
+    transition: opacity 0.3s ease;
+}
+
+.home-nav a:hover {
+    opacity: 0.7;
+}
+
+.home-cta-button {
+    background-color: var(--home-light-text);
+    color: var(--home-dark-bg) !important;
+    padding: 0.5rem 1.1rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.home-cta-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Hamburger Menu */
+.home-hamburger-menu {
+    display: none;
+    cursor: pointer;
+    z-index: 110;
+    padding: 10px;
+    margin: -10px;
+}
+
+.home-hamburger-icon {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+    z-index: 120;
+}
+
+.home-hamburger-icon span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: var(--home-light-text);
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+
+.home-hamburger-icon span:nth-child(1) {
+    top: 0px;
+}
+
+.home-hamburger-icon span:nth-child(2) {
+    top: 9px;
+}
+
+.home-hamburger-icon span:nth-child(3) {
+    top: 18px;
+}
+
+.home-hamburger-icon.home-open span:nth-child(1) {
+    top: 9px;
+    transform: rotate(135deg);
+}
+
+.home-hamburger-icon.home-open span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+}
+
+.home-hamburger-icon.home-open span:nth-child(3) {
+    top: 9px;
+    transform: rotate(-135deg);
+}
+
+/* Text Slide Up Animation */
+.text-slide-link {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    text-decoration: none;
+    padding: 2px 0;
+    cursor: pointer;
+}
+
+.text-slide-link .text-content {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.text-slide-link .text-visible {
+    display: block;
+    transform: translateY(0);
+    transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.text-slide-link .text-hidden {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: block;
+    transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.text-slide-link:hover .text-visible {
+    transform: translateY(-100%);
+}
+
+.text-slide-link:hover .text-hidden {
+    transform: translateY(-100%);
+}
+
+/* Override default link hover styles when using text-slide-link */
+.home-nav a.text-slide-link:hover {
+    opacity: 1;
+}
+
+/* Special styling for CTA button with text slide */
+.home-cta-button.text-slide-link {
+    padding: 0.7rem 1.5rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+.home-cta-button.text-slide-link .text-content {
+    color: var(--home-dark-bg);
+}
+
+.home-cta-button.text-slide-link:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive styles */
+/* Large mobile screens and tablets (up to 1024px) */
+@media (max-width: 1024px) {
+    .home-nav ul.home-nav-menu {
+        gap: 1rem;
+    }
+    
+    .home-hamburger-menu {
+        display: block !important;
+    }
+    
+    .home-nav ul.home-nav-menu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100% !important;
+        width: 220px;
+        height: 100vh;
+        background-color: var(--home-dark-bg);
+        padding: 4rem 1.2rem 1.2rem;
+        gap: 1.2rem;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        z-index: 50;
+    }
+    
+    .home-nav ul.home-nav-menu.home-active {
+        right: 0 !important;
+    }
+    
+    /* Adjust text slide animation for mobile */
+    .home-nav-menu a.text-slide-link {
+        width: auto;
+        display: inline-block;
+    }
+}
+
+/* Medium mobile screens (up to 778px) */
+@media (max-width: 778px) {
+    .home-hamburger-menu {
+        display: block !important;
+    }
+    
+    .home-nav ul.home-nav-menu {
+        width: 180px;
+    }
+}
+
+/* Small mobile screens (up to 435px) */
+@media (max-width: 435px) {
+    .home-header {
+        padding: 0.8rem 0.5rem;
+    }
+    
+    .home-logo a {
+        font-size: 1rem;
+    }
+    
+    .home-nav ul.home-nav-menu {
+        width: 100%;
+        right: -100% !important;
+        padding: 3rem 0.7rem 0.7rem;
+    }
+}
+
+/* Small mobile screens (up to 385px) */
+@media (max-width: 385px) {
+    .home-header {
+        padding: 0.7rem 0.4rem;
+    }
+    
+    .home-logo a {
+        font-size: 0.95rem;
+    }
+    
+    .home-nav ul.home-nav-menu {
+        width: 100%;
+        right: -100% !important;
+        padding: 2.5rem 0.5rem 0.5rem;
+    }
+}
+
+/* Small mobile screens (up to 325px) */
+@media (max-width: 325px) {
+    .home-header {
+        padding: 0.6rem 0.3rem;
+    }
+    
+    .home-logo a {
+        font-size: 0.85rem;
+    }
+    
+    .home-nav ul.home-nav-menu {
+        width: 100%;
+        right: -100% !important;
+        padding: 2rem 0.3rem 0.3rem;
+    }
+}

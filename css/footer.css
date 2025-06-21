@@ -1,18 +1,25 @@
-/* Footer styles */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap');
 
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+/* Footer Styles */
 .footer {
     background-color: #161616;
     color: #FFF7E9;
-    padding: 2rem;
+    padding: 3rem 2rem 2rem;
     position: relative;
     font-size: 15px;
     font-weight: 400;
     font-family: 'Manrope', sans-serif;
-    margin-top: 2rem;
+    overflow: hidden;
 }
 
-/* Add subtle noise texture to the background */
+/* Subtle noise texture */
 .footer::before {
     content: "";
     position: absolute;
@@ -25,202 +32,94 @@
     pointer-events: none;
 }
 
-/* Container for the three columns */
 .footer-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
     max-width: 1200px;
     margin: 0 auto;
-    flex-wrap: wrap;
-    gap: 2rem;
     position: relative;
     z-index: 1;
     padding-bottom: 3rem;
 }
 
-/* Each footer section (Menu, Socials, Resources) */
 .footer-section {
-    flex: 1;
-    min-width: 200px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
 }
 
+.footer-section:nth-child(1) { animation-delay: 0.1s; }
+.footer-section:nth-child(2) { animation-delay: 0.2s; }
+.footer-section:nth-child(3) { animation-delay: 0.3s; }
+
 .footer-section h3 {
-    font-size: 15px;
-    font-weight: 400;
-    margin-bottom: 1rem;
-    margin-top: 0;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
     color: #FFF7E9;
     opacity: 0.9;
     border-bottom: 1px solid rgba(255, 247, 233, 0.15);
-    padding-bottom: 10px;
+    padding-bottom: 0.75rem;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 0.4s;
     font-family: 'Manrope', sans-serif;
 }
 
 .footer-section ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 .footer-section li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
 }
 
-.footer-section a {
-    color: #FFF7E9;
-    text-decoration: none;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-    font-family: 'Manrope', sans-serif;
-}
+.footer-section li:nth-child(1) { animation-delay: 0.5s; }
+.footer-section li:nth-child(2) { animation-delay: 0.6s; }
+.footer-section li:nth-child(3) { animation-delay: 0.7s; }
+.footer-section li:nth-child(4) { animation-delay: 0.8s; }
+.footer-section li:nth-child(5) { animation-delay: 0.9s; }
 
-.footer-section a:hover {
-    opacity: 1;
-}
-
-/* Bottom section with copyright, time and scroll button */
-.footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-}
-
-/* Copyright section */
-.copyright {
-    flex: 1;
-}
-
-.copyright-main {
-    margin: 0;
-    line-height: 1.2;
-    font-size: 30px;
-    font-weight: 500;
-    color: #FFF7E9;
-    opacity: 0.9;
-    font-family: 'Manrope', sans-serif;
-}
-
-.copyright-sub {
-    margin: 0;
-    line-height: 1.2;
-    font-size: 30px;
-    font-weight: 500;
-    color: #FFF7E9;
-    opacity: 0.9;
-    font-family: 'Manrope', sans-serif;
-}
-
-/* Local time section */
-.local-time {
-    flex: 1;
-    text-align: center;
-}
-
-.local-time p:first-child {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 4px;
-    color: #FFF7E9;
-    opacity: 0.8;
-    margin-top: 0;
-    font-family: 'Manrope', sans-serif;
-}
-
-.local-time p:last-child {
-    margin: 0;
-    font-variant-numeric: tabular-nums;
-    font-size: 15px;
-    color: #FFF7E9;
-    opacity: 0.8;
-    font-family: 'Manrope', sans-serif;
-}
-
-/* Scroll to top button */
-.scroll-top {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(255, 247, 233, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease;
-    color: #FFF7E9;
-    text-decoration: none;
-}
-
-.scroll-top:hover {
-    background-color: rgba(255, 247, 233, 0.2);
-}
-
-.scroll-top svg {
-    width: 20px;
-    height: 20px;
-    stroke: #FFF7E9;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .footer-bottom {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
-    }
-    
-    .copyright, .local-time {
-        text-align: center;
-    }
-    
-    .scroll-top {
-        margin: 0 auto;
-    }
-    
-    .copyright-main,
-    .copyright-sub {
-        font-size: 24px;
-    }
-}
-
-/* Text Slide Up Animation for Navigation and Footer Links */
-
-/* Common styles for all animated links */
+/* Text slide animation */
 .text-slide-link {
     position: relative;
     overflow: hidden;
     display: inline-block;
     text-decoration: none;
+    color: #FFF7E9;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
     padding: 2px 0;
-    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
 }
 
-.text-slide-link .text-content {
+.text-slide-link:hover {
+    opacity: 1;
+}
+
+.text-content {
     position: relative;
     display: inline-block;
     overflow: hidden;
 }
 
-.text-slide-link .text-visible {
+.text-visible {
     display: block;
     transform: translateY(0);
-    transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.text-slide-link .text-hidden {
+.text-hidden {
     position: absolute;
     top: 100%;
     left: 0;
     display: block;
-    transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .text-slide-link:hover .text-visible {
@@ -231,13 +130,117 @@
     transform: translateY(-100%);
 }
 
-/* Override default link styles when using text-slide-link */
-.footer-section a.text-slide-link {
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
+/* Footer bottom */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(255, 247, 233, 0.1);
+    padding-top: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 1s;
 }
 
-.footer-section a.text-slide-link:hover {
-    opacity: 1;
+.copyright {
+    flex: 1;
 }
 
+.copyright-main,
+.copyright-sub {
+    margin: 0;
+    line-height: 1.2;
+    font-size: clamp(24px, 4vw, 30px);
+    font-weight: 500;
+    color: #FFF7E9;
+    opacity: 0.9;
+    font-family: 'Manrope', sans-serif;
+}
+
+.local-time {
+    flex: 1;
+    text-align: center;
+}
+
+.local-time p:first-child {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+    opacity: 0.6;
+    color: #FFF7E9;
+    font-family: 'Manrope', sans-serif;
+}
+
+.local-time p:last-child {
+    font-variant-numeric: tabular-nums;
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.8;
+    margin: 0;
+    color: #FFF7E9;
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .footer {
+        padding: 2rem 1rem;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .copyright, .local-time {
+        text-align: center;
+    }
+
+    .copyright-main,
+    .copyright-sub {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        gap: 1.5rem;
+    }
+
+    .footer-section h3 {
+        font-size: 14px;
+    }
+
+    .footer-section a {
+        font-size: 14px;
+    }
+}

@@ -1,79 +1,127 @@
 /**
  * Custom Cursor Implementation for rixco website
- * Fixed version to work with Netlify deployment
+ * Complete custom cursor - hides default cursor everywhere
  */
 
-// Wait for DOM to be fully loaded before initializing
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if jQuery is available, use it if so
-    const $ = window.jQuery || window.$;
-    
-    // Select the cursor element
-    const cursor = document.querySelector('.cursor');
-    
-    // Make sure the cursor exists
-    if (!cursor) {
-        console.error('Cursor element not found. Make sure <div class="cursor"></div> exists in your HTML.');
-        return;
-    }
-    
-    // Variables for smooth cursor movement
+(function() {
+    let cursor;
     let mouseX = 0;
     let mouseY = 0;
     let cursorX = 0;
     let cursorY = 0;
-    
-    // Store timeout ID to be able to clear it
     let arrowTimeout;
+    let isInitialized = false;
     
     // More reliable touch device detection
     const isTouchDevice = () => {
-        // Check for actual touch capability, not just the presence of the API
         return ('ontouchstart' in window) && 
                (navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0) &&
                (window.matchMedia("(pointer: coarse)").matches);
     };
     
-    // Disable the custom cursor on actual touch-only devices
-    if (isTouchDevice()) {
-        cursor.style.display = 'none';
-        return; // Exit early for touch-only devices
-    }
-    
-    // Ensure cursor is visible
-    cursor.style.opacity = '1';
-    cursor.style.zIndex = '9999';
-    
-    // Add SVG arrow to cursor element once on init to prevent creation issues
-    const createArrowSvg = () => {
-        if (!document.querySelector('.cursor .arrow-svg')) {
-            const svgNS = "http://www.w3.org/2000/svg";
-            const svg = document.createElementNS(svgNS, "svg");
-            svg.setAttribute("viewBox", "0 0 14 15");
-            svg.setAttribute("fill", "none");
-            svg.setAttribute("class", "arrow-svg");
-            svg.setAttribute("width", "32");
-            svg.setAttribute("height", "32");
-            svg.setAttribute("aria-hidden", "true");
+    // Force hide default cursor everywhere
+    const hideDefaultCursor = () => {
+        // Create comprehensive CSS to hide cursor everywhere
+        const style = document.createElement('style');
+        style.id = 'force-cursor-hide';
+        style.textContent = `
+            html, body, * {
+                cursor: none !important;
+            }
             
-            const path = document.createElementNS(svgNS, "path");
-            path.setAttribute("d", "M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z");
-            path.setAttribute("fill", "currentColor");
+            *:hover, *:active, *:focus {
+                cursor: none !important;
+            }
             
-            svg.appendChild(path);
-            cursor.appendChild(svg);
+            /* Scrollbar targeting - very aggressive */
+            ::-webkit-scrollbar {
+                cursor: none !important;
+            }
             
-            // Position the SVG centered in the cursor
-            svg.style.position = 'absolute';
-            svg.style.top = '50%';
-            svg.style.left = '50%';
-            svg.style.transform = 'translate(-50%, -50%)';
-            svg.style.opacity = '0'; // Start with 0 opacity
-        }
+            ::-webkit-scrollbar-thumb {
+                cursor: none !important;
+            }
+            
+            ::-webkit-scrollbar-track {
+                cursor: none !important;
+            }
+            
+            ::-webkit-scrollbar-corner {
+                cursor: none !important;
+            }
+            
+            ::-webkit-scrollbar-button {
+                cursor: none !important;
+            }
+            
+            ::-webkit-scrollbar-track-piece {
+                cursor: none !important;
+            }
+            
+            /* All scrollbar states */
+            ::-webkit-scrollbar:hover,
+            ::-webkit-scrollbar:active,
+            ::-webkit-scrollbar-thumb:hover,
+            ::-webkit-scrollbar-thumb:active,
+            ::-webkit-scrollbar-track:hover,
+            ::-webkit-scrollbar-track:active {
+                cursor: none !important;
+            }
+            
+            /* Target all interactive elements */
+            a, button, input, textarea, select, [role="button"], 
+            div, span, section, header, nav, main, footer,
+            ul, li, p, h1, h2, h3, h4, h5, h6 {
+                cursor: none !important;
+            }
+            
+            /* Force override any existing cursor styles with highest specificity */
+            html * {
+                cursor: none !important;
+            }
+            
+            body * {
+                cursor: none !important;
+            }
+            
+            /* Target body and html specifically */
+            html {
+                cursor: none !important;
+            }
+            
+            body {
+                cursor: none !important;
+            }
+        `;
+        document.head.appendChild(style);
     };
     
-    // Create the arrow SVG immediately
-    createArrowSvg();
+    // Create arrow SVG
+    const createArrowSvg = () => {
+        if (!cursor || document.querySelector('.cursor .arrow-svg')) return;
+        
+        const svgNS = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(svgNS, "svg");
+        svg.setAttribute("viewBox", "0 0 14 15");
+        svg.setAttribute("fill", "none");
+        svg.setAttribute("class", "arrow-svg");
+        svg.setAttribute("width", "32");
+        svg.setAttribute("height", "32");
+        svg.setAttribute("aria-hidden", "true");
+        
+        const path = document.createElementNS(svgNS, "path");
+        path.setAttribute("d", "M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z");
+        path.setAttribute("fill", "currentColor");
+        
+        svg.appendChild(path);
+        cursor.appendChild(svg);
+        
+        svg.style.position = 'absolute';
+        svg.style.top = '50%';
+        svg.style.left = '50%';
+        svg.style.transform = 'translate(-50%, -50%)';
+        svg.style.opacity = '0';
+    };
     
     // Track mouse position
     const trackMouse = (e) => {
@@ -81,101 +129,82 @@ document.addEventListener('DOMContentLoaded', function() {
         mouseY = e.clientY;
     };
     
-    // If jQuery is available, use it for compatibility, otherwise use native DOM
-    if ($) {
-        // Find all clickable elements on the site
-        const clickableElements = $('a, button, .home-hamburger-menu, .text-slide-link, .home-cta-button, [role="button"]');
+    // Handle cursor expansion on hover
+    const handleMouseEnter = (e) => {
+        if (!cursor) return;
         
-        $(document).on('mousemove', trackMouse);
+        if (arrowTimeout) {
+            clearTimeout(arrowTimeout);
+            arrowTimeout = null;
+        }
         
-        // Add hover effects to clickable elements
-        clickableElements.each(function() {
-            const element = $(this);
-            
-            element.on('mouseenter', function() {
-                if (arrowTimeout) {
-                    clearTimeout(arrowTimeout);
-                    arrowTimeout = null;
+        cursor.classList.add('expanded');
+        const svg = document.querySelector('.cursor .arrow-svg');
+        if (svg) {
+            svg.style.opacity = '1';
+            svg.style.display = 'block';
+        }
+    };
+    
+    const handleMouseLeave = (e) => {
+        if (!cursor) return;
+        
+        cursor.classList.remove('expanded');
+        const svg = document.querySelector('.cursor .arrow-svg');
+        if (svg) {
+            svg.style.opacity = '0';
+            arrowTimeout = setTimeout(() => {
+                if (svg && svg.style.opacity === '0') {
+                    svg.style.display = 'none';
                 }
-                
-                cursor.classList.add('expanded');
-                const svg = document.querySelector('.cursor .arrow-svg');
-                if (svg) {
-                    svg.style.opacity = '1';
-                    svg.style.display = 'block';
-                }
-            });
-            
-            element.on('mouseleave', function() {
-                cursor.classList.remove('expanded');
-                const svg = document.querySelector('.cursor .arrow-svg');
-                if (svg) {
-                    svg.style.opacity = '0';
-                    arrowTimeout = setTimeout(() => {
-                        if (svg.style.opacity === '0') {
-                            svg.style.display = 'none';
-                        }
-                    }, 250);
-                }
-            });
-        });
+            }, 250);
+        }
+    };
+    
+    // Initialize cursor basics
+    const initCursor = () => {
+        cursor = document.querySelector('.cursor');
         
-        // Handle window events
-        $(window).on('mouseleave', function() {
-            cursor.style.opacity = '0';
-        });
+        if (!cursor) {
+            console.error('Cursor element not found. Make sure <div class="cursor"></div> exists in your HTML.');
+            return false;
+        }
         
-        $(window).on('mouseenter', function() {
-            cursor.style.opacity = '1';
-        });
-    } else {
-        // Fallback to vanilla JS if jQuery is not available
+        if (isTouchDevice()) {
+            cursor.style.display = 'none';
+            return false;
+        }
+        
+        // Force hide default cursor everywhere
+        hideDefaultCursor();
+        
+        cursor.style.opacity = '1';
+        cursor.style.zIndex = '9999';
+        
+        createArrowSvg();
+        
+        // Add mouse tracking
         document.addEventListener('mousemove', trackMouse);
-        
-        // Find clickable elements
-        const clickableElements = document.querySelectorAll('a, button, .home-hamburger-menu, .text-slide-link, .home-cta-button, [role="button"]');
-        
-        clickableElements.forEach(element => {
-            element.addEventListener('mouseenter', function() {
-                if (arrowTimeout) {
-                    clearTimeout(arrowTimeout);
-                    arrowTimeout = null;
-                }
-                
-                cursor.classList.add('expanded');
-                const svg = document.querySelector('.cursor .arrow-svg');
-                if (svg) {
-                    svg.style.opacity = '1';
-                    svg.style.display = 'block';
-                }
-            });
-            
-            element.addEventListener('mouseleave', function() {
-                cursor.classList.remove('expanded');
-                const svg = document.querySelector('.cursor .arrow-svg');
-                if (svg) {
-                    svg.style.opacity = '0';
-                    arrowTimeout = setTimeout(() => {
-                        if (svg.style.opacity === '0') {
-                            svg.style.display = 'none';
-                        }
-                    }, 250);
-                }
-            });
-        });
         
         // Handle window events
         window.addEventListener('mouseleave', function() {
-            cursor.style.opacity = '0';
+            if (cursor) cursor.style.opacity = '0';
         });
         
         window.addEventListener('mouseenter', function() {
-            cursor.style.opacity = '1';
+            if (cursor) cursor.style.opacity = '1';
         });
-    }
+        
+        return true;
+    };
     
-    // Use requestAnimationFrame for smooth cursor animation
-    function updateCursor() {
+    // Smooth cursor animation
+    const updateCursor = () => {
+        if (!cursor) {
+            requestAnimationFrame(updateCursor);
+            return;
+        }
+        
         const ease = 0.12;
         cursorX += (mouseX - cursorX) * ease;
         cursorY += (mouseY - cursorY) * ease;
@@ -183,11 +212,124 @@ document.addEventListener('DOMContentLoaded', function() {
         cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
         
         requestAnimationFrame(updateCursor);
+    };
+    
+    // Add event delegation for dynamic content
+    const setupEventDelegation = () => {
+        // Use event delegation on document to catch dynamically loaded elements
+        document.addEventListener('mouseenter', function(e) {
+            const target = e.target;
+            const clickableSelectors = [
+                'a', 'button', '[role="button"]', 'input', 'textarea', 'select',
+                '.home-hamburger-menu', '.text-slide-link', '.home-cta-button',
+                '.project-link', '.contact-button'
+            ];
+            
+            // Check if the target or any parent matches our selectors
+            let element = target;
+            while (element && element !== document) {
+                for (const selector of clickableSelectors) {
+                    if (element.matches && element.matches(selector)) {
+                        handleMouseEnter(e);
+                        return;
+                    }
+                }
+                element = element.parentElement;
+            }
+        }, true);
+        
+        document.addEventListener('mouseleave', function(e) {
+            const target = e.target;
+            const clickableSelectors = [
+                'a', 'button', '[role="button"]', 'input', 'textarea', 'select',
+                '.home-hamburger-menu', '.text-slide-link', '.home-cta-button',
+                '.project-link', '.contact-button'
+            ];
+            
+            let element = target;
+            while (element && element !== document) {
+                for (const selector of clickableSelectors) {
+                    if (element.matches && element.matches(selector)) {
+                        handleMouseLeave(e);
+                        return;
+                    }
+                }
+                element = element.parentElement;
+            }
+        }, true);
+    };
+    
+    // Force cursor hiding periodically to override any other scripts
+    const forceCursorHiding = () => {
+        document.documentElement.style.cursor = 'none';
+        document.body.style.cursor = 'none';
+        
+        // Apply to all elements including newly created ones
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(el => {
+            el.style.cursor = 'none';
+        });
+        
+        // Specifically target scrollbar areas
+        document.documentElement.style.setProperty('cursor', 'none', 'important');
+        document.body.style.setProperty('cursor', 'none', 'important');
+        
+        // Force override on common containers
+        const containers = document.querySelectorAll('html, body, div, section, header, nav, main, footer');
+        containers.forEach(el => {
+            el.style.setProperty('cursor', 'none', 'important');
+        });
+    };
+    
+    // Main initialization function
+    const initialize = () => {
+        if (isInitialized) return;
+        
+        if (initCursor()) {
+            setupEventDelegation();
+            updateCursor();
+            
+            // Force hide cursor immediately and periodically
+            forceCursorHiding();
+            setInterval(forceCursorHiding, 500); // Check every 500ms
+            
+            // Also force hide on scroll events
+            window.addEventListener('scroll', forceCursorHiding);
+            document.addEventListener('scroll', forceCursorHiding);
+            
+            // Force hide on mouse events
+            document.addEventListener('mouseover', forceCursorHiding);
+            document.addEventListener('mouseenter', forceCursorHiding);
+            
+            // Also force hide after any dynamic content changes
+            const observer = new MutationObserver(() => {
+                setTimeout(forceCursorHiding, 50);
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+            
+            isInitialized = true;
+        }
+    };
+    
+    // Try to initialize immediately if DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initialize);
+    } else {
+        initialize();
     }
     
-    // Start the animation
-    updateCursor();
+    // Also try to initialize after a short delay to catch dynamic content
+    setTimeout(initialize, 100);
+    setTimeout(initialize, 500);
     
-    // Log successful initialization for debugging
-    console.log('Custom cursor initialized successfully');
-});
+    // Expose reinitialize function globally for pageSection.js to call
+    window.initCustomCursor = function() {
+        initialize();
+        
+        // Force hide default cursor again after reinitialization
+        setTimeout(() => {
+            forceCursorHiding();
+        }, 50);
+    };
+    
+})();

@@ -1,5 +1,5 @@
-<!-- Footer Section -->
-<footer class="footer">
+<!-- Footer Component -->
+<div class="footer">
     <div class="footer-container">
         <div class="footer-section scroll-fade-in" data-scroll-delay="100">
             <h3 class="scroll-slide-up" data-scroll-delay="150">Menu</h3>
@@ -97,30 +97,5 @@
             <p id="current-time" class="scroll-slide-up" data-scroll-delay="600">Loading...</p>
         </div>
     </div>
-</footer>
-
-<!-- Malaysia Time Script -->
-<script>
-    // Function to update the local time for Malaysia
-    function updateMalaysiaTime() {
-        // Get the current date and time in Malaysia (UTC+8)
-        const options = {
-            timeZone: 'Asia/Kuala_Lumpur',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: true
-        };
-        
-        const malaysiaTime = new Date().toLocaleTimeString('en-US', options);
-        
-        // Update the time element
-        document.getElementById('current-time').textContent = malaysiaTime;
-    }
-
-    // Update time immediately
-    updateMalaysiaTime();
-
-    // Update time every second
-    setInterval(updateMalaysiaTime, 1000);
-</script>
+</div>
+<!-- End Footer Component -->

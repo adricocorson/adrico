@@ -10,7 +10,6 @@
 <body>
     <div class="container">
 
-
         <!-- Header Section -->
          
   
@@ -21,14 +20,20 @@
                 </div>
             <div class="intro-content">
                 <h2>my latest work.</h2>
-                <p>Below are some of the recent projects I've worked on. Each project represents a unique challenge and opportunity to apply my skills in web development and design.</p>
+                <p>Explore my web development projects and poster designs. Switch between categories to see different aspects of my creative and technical skills.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="projects">Projects</button>
+                <button class="filter-btn" data-filter="posters">Posters</button>
             </div>
         </section>
 
         <!-- Projects Grid -->
         <div class="projects-grid">
             <!-- Project 1 - Vouch -->
-            <div class="project-card">
+            <div class="project-card" data-category="projects">
                 <div class="project-image" style="background-image: url('images/vouch.png');"></div>
                 <div class="project-content">
                     <div class="project-main">
@@ -53,7 +58,7 @@
             </div>
 
             <!-- Project 2 - Personal Portfolio -->
-            <div class="project-card">
+            <div class="project-card" data-category="projects">
                 <div class="project-image" style="background-image: url('images/portofolio.png');"></div>
                 <div class="project-content">
                     <div class="project-main">
@@ -78,7 +83,7 @@
             </div>
 
             <!-- Project 3 - AI Image Generator -->
-            <div class="project-card">
+            <div class="project-card" data-category="projects">
                 <div class="project-image" style="background-image: url('images/ai.PNG');"></div>
                 <div class="project-content">
                     <div class="project-main">
@@ -103,7 +108,7 @@
             </div>
 
             <!-- Project 4 - EcoBro -->
-            <div class="project-card">
+            <div class="project-card" data-category="projects">
                 <div class="project-image" style="background-image: url('images/ECO.png');"></div>
                 <div class="project-content">
                     <div class="project-main">
@@ -128,7 +133,7 @@
             </div>
 
             <!-- Project 5 - EasyBook -->
-            <div class="project-card">
+            <div class="project-card" data-category="projects">
                 <div class="project-image" style="background-image: url('images/EasyBook.png');"></div>
                 <div class="project-content">
                     <div class="project-main">
@@ -152,7 +157,7 @@
             </div>
 
             <!-- Project 6 - Scholapedia -->
-            <div class="project-card">
+            <div class="project-card" data-category="projects">
                 <div class="project-image" style="background-image: url('images/Scholapedia.png');"></div>
                 <div class="project-content">
                     <div class="project-main">
@@ -174,69 +179,79 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Poster 1 -->
+            <div class="project-card poster-card" data-category="posters">
+                <div class="poster-image" style="background-image: url('images/P1.png');"></div>
+            </div>
+
+            <!-- Poster 2 -->
+            <div class="project-card poster-card" data-category="posters">
+                <div class="poster-image" style="background-image: url('images/P2.png');"></div>
+            </div>
+
+            <!-- Poster 3 -->
+            <div class="project-card poster-card" data-category="posters">
+                <div class="poster-image" style="background-image: url('images/P3.png');"></div>
+            </div>
+
+            <!-- Poster 4 -->
+            <div class="project-card poster-card" data-category="posters">
+                <div class="poster-image" style="background-image: url('images/P4.png');"></div>
+            </div>
+
+            <!-- Poster 5 -->
+            <div class="project-card poster-card" data-category="posters">
+                <div class="poster-image" style="background-image: url('images/P5.png');"></div>
+            </div>
         </div>
     </div>
 
+    <!-- Add the JavaScript functionality -->
     <script>
-        // Enhanced image fallback handler
-        document.addEventListener('DOMContentLoaded', function() {
-            const projectImages = document.querySelectorAll('.project-image');
-            
-            projectImages.forEach(function(imageDiv) {
-                const bgImage = window.getComputedStyle(imageDiv).backgroundImage;
-                const url = bgImage.match(/url\(['"]?([^'"]+)['"]?\)/);
-                
-                if (url && url[1]) {
-                    const img = new Image();
-                    img.onerror = function() {
-                        imageDiv.classList.add('no-image');
-                        imageDiv.style.backgroundImage = 'none';
-                    };
-                    img.src = url[1];
-                }
-            });
-
-            // Enhanced link handling
-            const projectLinks = document.querySelectorAll('.project-link');
-            projectLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
-            });
-
-            // Make entire card clickable with improved handling
+        // Wait for content to load (since this is loaded via jQuery)
+        setTimeout(function() {
+            // Project filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
             const projectCards = document.querySelectorAll('.project-card');
-            projectCards.forEach(card => {
-                const link = card.querySelector('.project-link');
-                if (link) {
-                    card.addEventListener('click', function(e) {
-                        if (!e.target.closest('.project-link')) {
-                            e.preventDefault();
-                            link.click();
+            
+            // Add click event listeners to filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Get the filter value
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Filter the project cards
+                    projectCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        
+                        if (filterValue === cardCategory) {
+                            // Show matching cards
+                            card.style.display = 'flex';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        } else {
+                            // Hide non-matching cards
+                            card.style.display = 'none';
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
                         }
                     });
-                }
-            });
-
-            // Smooth scroll reveal animation
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
                 });
-            }, observerOptions);
-
-            projectCards.forEach(card => {
-                observer.observe(card);
             });
-        });
+            
+            // Initialize with projects shown by default
+            const projectsBtn = document.querySelector('.filter-btn[data-filter="projects"]');
+            if (projectsBtn) {
+                projectsBtn.click();
+            }
+        }, 100); // Small delay to ensure content is loaded
     </script>
 </body>
 </html>

@@ -22,7 +22,7 @@
                         <span class="text-hidden">Services</span>
                     </span>
                 </a></li>
-                <li class="scroll-slide-up" data-scroll-delay="350"><a href="#projects" class="text-slide-link">
+                <li class="scroll-slide-up" data-scroll-delay="350"><a href="#project" class="text-slide-link">
                     <span class="text-content">
                         <span class="text-visible">Projects</span>
                         <span class="text-hidden">Projects</span>
@@ -98,4 +98,38 @@
         </div>
     </div>
 </div>
+
+<script>
+    function updateTime() {
+        const now = new Date();
+        
+        // Format time for Kuala Lumpur timezone (UTC+8)
+        const options = {
+            timeZone: 'Asia/Kuala_Lumpur',
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        
+        const timeString = now.toLocaleTimeString('en-US', options);
+        const timeElement = document.getElementById('current-time');
+        
+        if (timeElement) {
+            timeElement.textContent = timeString;
+        }
+    }
+
+    // Update time immediately when page loads
+    updateTime();
+    
+    // Update time every second
+    setInterval(updateTime, 1000);
+
+    // Optional: Add smooth transition effect when time changes
+    const timeElement = document.getElementById('current-time');
+    if (timeElement) {
+        timeElement.style.transition = 'opacity 0.3s ease';
+    }
+</script>
 <!-- End Footer Component -->

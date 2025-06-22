@@ -6,7 +6,7 @@
 
 .contact-wrapper {
     width: 100%;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 40px 2rem;
     position: relative;
@@ -18,9 +18,9 @@
 
 .contact-container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 3rem;
     background-color: #FFF7E9;
     color: #161616;
     border-radius: 4px;
@@ -47,13 +47,13 @@
 
 .contact-header {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     position: relative;
     z-index: 2;
 }
 
 .contact-header h1 {
-    font-size: 70px;
+    font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 600;
     color: #161616;
     position: relative;
@@ -77,18 +77,19 @@
 
 .contact-center {
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     text-align: center;
 }
 
 .subheading {
-    font-size: 1rem;
-    margin-bottom: 2rem;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    margin-bottom: 2.5rem;
     color: rgba(22, 22, 22, 0.7);
-    max-width: 500px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     font-family: 'Manrope', sans-serif;
+    line-height: 1.6;
 }
 
 form {
@@ -97,18 +98,18 @@ form {
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     position: relative;
 }
 
 .form-control {
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
     background: transparent;
     border: none;
     border-bottom: 1px solid rgba(22, 22, 22, 0.3);
     color: #161616;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
     transition: all 0.3s ease;
     font-family: 'Manrope', sans-serif;
 }
@@ -121,29 +122,30 @@ form {
 .form-label {
     position: absolute;
     left: 0;
-    top: 0.5rem;
+    top: 0.75rem;
     color: rgba(22, 22, 22, 0.7);
     pointer-events: none;
     transition: 0.3s ease all;
     font-family: 'Manrope', sans-serif;
+    font-size: clamp(0.85rem, 2vw, 1rem);
 }
 
 .form-control:focus + .form-label,
 .form-control:not(:placeholder-shown) + .form-label {
     top: -20px;
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
     color: #161616;
 }
 
 textarea.form-control {
-    min-height: 60px;
+    min-height: 80px;
     resize: none;
 }
 
 .btn-container {
     display: flex;
     justify-content: center;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
 }
 
 .contact-btn {
@@ -151,9 +153,9 @@ textarea.form-control {
     overflow: hidden;
     border: none;
     display: inline-block;
-    font-size: 18px;
-    line-height: 18px;
-    padding: 22px 50px 21px;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: 1.2;
+    padding: clamp(16px, 3vw, 24px) clamp(32px, 6vw, 60px);
     text-decoration: none;
     cursor: pointer;
     background: #3B3834;
@@ -166,6 +168,7 @@ textarea.form-control {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-family: 'Manrope', sans-serif;
+    transition: all 0.3s ease;
 }
 
 .contact-btn span:first-child {
@@ -186,8 +189,8 @@ textarea.form-control {
     top: 50%;
     left: 50%;
     transform: translateY(225%) translateX(-50%);
-    height: 18px;
-    line-height: 18px;
+    height: auto;
+    line-height: 1.2;
 }
 
 .contact-btn:after {
@@ -215,21 +218,176 @@ textarea.form-control {
     transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
 }
 
-/* Base responsive styles */
-@media (max-width: 1024px) {
+/* Large Desktop screens (1440px+) - Laptop L */
+@media (min-width: 1440px) {
+    .contact-wrapper {
+        padding: 60px 3rem;
+    }
+    
+    .contact-container {
+        max-width: 1200px;
+        padding: 4rem;
+    }
+    
+    .contact-header {
+        margin-bottom: 3rem;
+    }
+    
+    .contact-center {
+        max-width: 800px;
+    }
+    
+    .subheading {
+        margin-bottom: 3rem;
+        font-size: 1.2rem;
+    }
+    
+    .form-group {
+        margin-bottom: 2.5rem;
+    }
+    
+    .form-control {
+        padding: 1rem 0;
+        font-size: 1.1rem;
+    }
+    
+    .form-label {
+        top: 1rem;
+        font-size: 1rem;
+    }
+    
+    .form-control:focus + .form-label,
+    .form-control:not(:placeholder-shown) + .form-label {
+        font-size: 0.9rem;
+    }
+    
+    textarea.form-control {
+        min-height: 100px;
+    }
+    
+    .btn-container {
+        margin-top: 3rem;
+    }
+    
+    .contact-btn {
+        font-size: 1.1rem;
+        padding: 24px 60px;
+    }
+}
+
+/* Desktop (1200px - 1439px) */
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .contact-wrapper {
+        padding: 50px 2.5rem;
+    }
+    
+    .contact-container {
+        padding: 3.5rem;
+        max-width: 1100px;
+    }
+    
+    .contact-center {
+        max-width: 750px;
+    }
+}
+
+/* Laptop (1024px - 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+    .contact-wrapper {
+        padding: 40px 2rem;
+    }
+    
+    .contact-container {
+        padding: 2.5rem;
+        max-width: 900px;
+    }
+    
+    .contact-header h1 {
+        font-size: 4rem;
+    }
+    
+    .contact-center {
+        max-width: 650px;
+    }
+}
+
+/* Medium devices (tablets) - 768px to 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .contact-wrapper {
+        padding: 30px 1.5rem;
+    }
+    
+    .contact-container {
+        padding: 2rem;
+    }
+    
+    .contact-header h1 {
+        font-size: 3.5rem;
+    }
+    
+    .subheading {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-btn {
+        font-size: 1rem;
+        padding: 20px 45px;
+    }
+}
+
+/* Small devices (landscape phones) - 576px to 767px */
+@media (min-width: 576px) and (max-width: 767px) {
+    .contact-wrapper {
+        padding: 25px 1rem;
+    }
+    
     .contact-container {
         padding: 1.5rem;
     }
     
     .contact-header h1 {
-        font-size: 90px;
+        font-size: 2.5rem;
+        padding: 0 15px;
+    }
+    
+    .subheading {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.3rem;
+    }
+    
+    .contact-btn {
+        font-size: 0.9rem;
+        padding: 18px 35px;
     }
 }
 
-/* Medium devices (tablets) */
-@media (max-width: 768px) {
+/* Extra small devices (portrait phones) - up to 575px */
+@media (max-width: 575px) {
+    .contact-wrapper {
+        padding: 20px 1rem;
+    }
+    
+    .contact-container {
+        padding: 1.5rem;
+    }
+    
+    .contact-header {
+        margin-bottom: 1.5rem;
+    }
+    
     .contact-header h1 {
-        font-size: 60px;
+        font-size: 2rem;
+        letter-spacing: -1px;
+        padding: 0 10px;
     }
     
     .subheading {
@@ -241,64 +399,53 @@ textarea.form-control {
         margin-bottom: 1.2rem;
     }
     
-    .contact-btn {
-        font-size: 16px;
-        line-height: 16px;
-        padding: 18px 40px;
-    }
-    
-    .contact-btn span:last-child {
-        height: 16px;
-        line-height: 16px;
-    }
-}
-
-/* Small devices (landscape phones) */
-@media (max-width: 576px) {
-    .contact-header h1 {
-        font-size: 40px;
-        padding: 0 10px;
-    }
-    
-    .contact-container {
-        padding: 1rem;
-    }
-    
-    .subheading {
-        font-size: 0.85rem;
-        margin-bottom: 1.2rem;
-    }
-    
-    .contact-btn {
-        font-size: 14px;
-        line-height: 14px;
-        padding: 16px 32px;
-    }
-    
     .form-control {
+        padding: 0.6rem 0;
         font-size: 0.9rem;
     }
     
     .form-label {
+        top: 0.6rem;
         font-size: 0.9rem;
     }
-}
-
-/* Extra small devices (portrait phones) */
-@media (max-width: 375px) {
-    .contact-header h1 {
-        font-size: 32px;
-        letter-spacing: -1px;
+    
+    .form-control:focus + .form-label,
+    .form-control:not(:placeholder-shown) + .form-label {
+        font-size: 0.8rem;
     }
     
-    .subheading {
-        font-size: 0.8rem;
+    textarea.form-control {
+        min-height: 70px;
+    }
+    
+    .btn-container {
+        margin-top: 1.5rem;
     }
     
     .contact-btn {
         width: 100%;
-        padding: 14px 20px;
-        font-size: 13px;
+        font-size: 0.85rem;
+        padding: 16px 25px;
+    }
+}
+
+/* Very small devices - 375px and below */
+@media (max-width: 375px) {
+    .contact-wrapper {
+        padding: 15px 0.75rem;
+    }
+    
+    .contact-container {
+        padding: 1.25rem;
+    }
+    
+    .contact-header h1 {
+        font-size: 1.75rem;
+        letter-spacing: -0.5px;
+    }
+    
+    .subheading {
+        font-size: 0.85rem;
     }
     
     .form-control {
@@ -307,5 +454,10 @@ textarea.form-control {
     
     .form-label {
         font-size: 0.85rem;
+    }
+    
+    .contact-btn {
+        font-size: 0.8rem;
+        padding: 14px 20px;
     }
 }
